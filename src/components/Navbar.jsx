@@ -2,94 +2,88 @@ import React from 'react';
 import { useContext } from 'react';
 import { Menubar } from 'primereact/menubar';
 import { InputText } from 'primereact/inputtext';
-import { Badge } from 'primereact/badge';
+import { ReactComponent as Logo } from '../logo.svg';
 import { Avatar } from 'primereact/avatar';
 import { ModeContext } from '../contexts/MainContext';
+import './Navbar.css'
 
 export default function Navbar() {
     const { Tema } = useContext(ModeContext);
-    console.log(Tema)
-    const itemRenderer = (item) => (
-        <a className="flex align-items-center p-menuitem-link" href='k'>
-            <span className={item.icon} />
-            <span className="mx-2">{item.label}</span>
-            {item.badge && <Badge className="ml-auto" value={item.badge} />}
-            {item.shortcut && <span className="ml-auto border-1 surface-border border-round surface-100 text-xs p-1">{item.shortcut}</span>}
-        </a>
-    );
     const items = [
         {
-            label: 'Home',
-            icon: 'pi pi-home'
+            label: 'Ubicación',
+            icon: 'pi pi-map-marker'
         },
         {
-            label: 'Features',
-            icon: 'pi pi-star'
+            label: 'Ofertas',
+            icon: 'pi pi-tags'
         },
         {
-            label: 'Projects',
-            icon: 'pi pi-search',
+            label: 'Supermercado',
+            icon: 'pi pi-shop'
+        },
+        {
+            label: 'Moda',
+            icon: 'pi pi-shopping-bag'
+        },
+        {
+            label: 'Categorías',
+            icon: 'pi pi-th-large',
             items: [
                 {
                     label: 'Core',
                     icon: 'pi pi-bolt',
-                    shortcut: '⌘+S',
-                    template: itemRenderer
+                    
                 },
                 {
                     label: 'Blocks',
-                    icon: 'pi pi-server',
-                    shortcut: '⌘+B',
-                    template: itemRenderer
+                    icon: 'pi pi-server',                   
                 },
                 {
                     label: 'UI Kit',
-                    icon: 'pi pi-pencil',
-                    shortcut: '⌘+U',
-                    template: itemRenderer
+                    icon: 'pi pi-pencil',                 
                 },
-                {
-                    separator: true
-                },
-                {
-                    label: 'Templates',
-                    icon: 'pi pi-palette',
-                    items: [
-                        {
-                            label: 'Apollo',
-                            icon: 'pi pi-palette',
-                            badge: 2,
-                            template: itemRenderer
-                        },
-                        {
-                            label: 'Ultima',
-                            icon: 'pi pi-palette',
-                            badge: 3,
-                            template: itemRenderer
-                        }
-                    ]
-                }
             ]
         },
         {
-            label: 'Contact',
+            label: 'Ayuda',
             icon: 'pi pi-envelope',
-            badge: 3,
-            template: itemRenderer
-        }
+        },
+        {
+            label: 'Carrito',
+            icon: 'pi pi-shopping-cart'
+        },
     ];
 
-    const start = <img alt="logo" src="https://primefaces.org/cdn/primereact/images/logo.png" height="40" className="mr-2"></img>;
     const end = (
         <div className="flex align-items-center gap-2">
-            <InputText placeholder="Search" type="text" className="w-8rem sm:w-auto" />
             <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" shape="circle" />
         </div>
     );
-
+    
     return (
-        <div className="card">
-            <Menubar model={items} start={start} end={end} />
+        <div>
+            <div class='grid bg-orange-500'>
+                <div class="col-2 ">
+                    <div class="flex flex-row flex-wrap align-items-center justify-content-center text-center p-1 mt-3 text-white font-bold">
+                        <Logo className="App-logo"></Logo>
+                        <div>
+                            TiendaReact
+                        </div>
+                    </div>
+                </div>
+                <div class="col-5">
+                    <div class="text-center p-1 mt-3">
+                        <InputText style={{ width: '400px' }} placeholder=" Search" type="text"/>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="text-center p-3 border-round-sm bg-primary-reverse font-bold ">3</div>
+                </div>
+            </div>
+            <div className="card">
+                <Menubar id='navbar' model={items} end={end} />
+            </div>
         </div>
     )
 }
