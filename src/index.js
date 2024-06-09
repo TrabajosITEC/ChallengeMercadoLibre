@@ -8,21 +8,41 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { ModeProvider } from './contexts/MainContext';
 import Home from './pages/Home';
+import Results from './pages/Results';
+
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { PrimeReactProvider } from 'primereact/api';
+
+const primeConfig = {
+  ripple: true,
+  inputStyle: 'outlined',
+  pt: {
+    button: {
+      root: { className: 'bg-teal-500 hover:bg-teal-700 cursor-pointer text-white p-3 border-round border-none flex gap-2' },
+      label: 'text-white font-bold text-xl', // OR { className: 'text-white font-bold text-xl' }
+      icon: 'text-white text-2xl'
+    }
+  },
+};
 
 const router = createBrowserRouter([
-
   {
     path: "/",
     element: <Home/>
   },
+  {
+    path: "/results",
+    element: <Results />
+  }
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <ModeProvider>
-    <RouterProvider router={router} />
-  </ModeProvider>
+  <PrimeReactProvider value={primeConfig}>
+    <ModeProvider>
+      <RouterProvider router={router} />
+    </ModeProvider>
+  </PrimeReactProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

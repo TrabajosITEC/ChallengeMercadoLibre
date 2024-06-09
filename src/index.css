@@ -19,3 +19,17 @@ code {
 .fondo2{
   background-color: brown;
 }
+
+.fondoBoton {
+  background-color: green;
+  color: white; 
+}
+
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; 
+  text-align: center;
+}
