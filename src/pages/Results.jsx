@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import MainLayout from "../layouts/MainLayout";
 import { ProgressSpinner } from 'primereact/progressspinner';
 import '../index.css';
+import BasicDemo from '../components/card';
 
 export default function Results() {
   const location = useLocation();
@@ -16,7 +17,9 @@ export default function Results() {
       try {
         const response = await fetch(`https://api.mercadolibre.com/sites/MLA/search?q=${valorBuscado}`);
         const data = await response.json();
+        console.log(data)
         setResults(data.results);
+
       } catch (error) {
         console.error('Error en busqueda de elementos:', error);
       } finally {
@@ -42,11 +45,11 @@ export default function Results() {
     <MainLayout>
         <div>
         <h1>Resultados de busqueda: {valorBuscado}</h1>
-        <ul>
+        
             {results.map((result) => (
-            <li key={result.id}>{result.title}</li>
+            <BasicDemo titulo= {result.title} precio = {result.price} />   
             ))}
-        </ul>
+        {/* TODO: Reemplazar la lista por el componente que muestre los productos */}
         </div>
     </MainLayout>
   );
