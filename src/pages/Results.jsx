@@ -78,9 +78,12 @@ export default function Results() {
   };
 
   const paginatedResults = results.slice(first, first + rows); // Filtra los resultados para la página actual
+  
 
   if (loading) {
+    
     return (
+      
       <div className='loadingContainer'>
         <h3>Buscando...</h3>
         <ProgressSpinner />

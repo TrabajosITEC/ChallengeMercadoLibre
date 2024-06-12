@@ -16,13 +16,13 @@ import { PrimeReactProvider } from 'primereact/api';
 const primeConfig = {
   ripple: true,
   inputStyle: 'outlined',
-  pt: {
-    button: {
-      root: { className: 'bg-teal-500 hover:bg-teal-700 cursor-pointer text-white p-3 border-round border-none flex gap-2' },
-      label: 'text-white font-bold text-xl', // OR { className: 'text-white font-bold text-xl' }
-      icon: 'text-white text-2xl'
-    }
-  },
+  // pt: {
+  //   button: {
+  //     root: { className: 'bg-teal-500 hover:bg-teal-700 cursor-pointer text-white p-3 border-round border-none flex gap-2' },
+  //     label: 'text-white font-bold text-xl', // OR { className: 'text-white font-bold text-xl' }
+  //     icon: 'text-white text-2xl'
+  //   }
+  // },
 };
 
 const router = createBrowserRouter([
