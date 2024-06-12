@@ -41,9 +41,12 @@ export default function Results() {
   }
 
   const paginatedResults = results.slice(first, first + rows); // Filtra los resultados para la página actual
+  
 
   if (loading) {
+    
     return (
+      
       <div className='loadingContainer'>
         <h3>Buscando...</h3>
         <ProgressSpinner />
@@ -54,7 +57,6 @@ export default function Results() {
   return (
     <MainLayout>
       <div>
-        <h1>Resultados de búsqueda: {valorBuscado}</h1>
         <Card info={paginatedResults}/>
         <Paginator first={first} rows={rows} totalRecords={results.length} onPageChange={onPageChange} />
       </div>
