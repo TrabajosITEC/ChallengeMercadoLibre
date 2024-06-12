@@ -4,11 +4,15 @@ import MainLayout from "../layouts/MainLayout";
 import { ProgressSpinner } from 'primereact/progressspinner';
 import '../index.css';
 import BasicDemo from '../components/card';
+import { Paginator } from 'primereact/paginator';
+import SortingDemo from '../components/card';
 
 export default function Results() {
   const location = useLocation();
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [first, setFirst] = useState(0); // Estado para la posición inicial de la paginación
+  const [rows, setRows] = useState(5); // Estado para el número de registros por página
   const valorBuscado = new URLSearchParams(location.search).get('param'); //El .search es una prop del hook location.
 
   useEffect(() => {
@@ -32,6 +36,13 @@ export default function Results() {
     }
   }, [valorBuscado]); // Se va a ejecutar cada vez que se modifique valor buscado!!
 
+  const onPageChange = (event) => {
+    setFirst(event.first);
+    setRows(event.rows);
+  }
+
+  const paginatedResults = results.slice(first, first + rows); // Filtra los resultados para la página actual
+
   if (loading) {
     return (
       <div className='loadingContainer'>
@@ -46,10 +57,11 @@ export default function Results() {
         <div>
         <h1>Resultados de busqueda: {valorBuscado}</h1>
         
-            {results.map((result) => (
-            <BasicDemo titulo= {result.title} precio = {result.price} />   
+            {paginatedResults.map((result) => (
+            /*<BasicDemo titulo= {result.title} precio = {result.price} />   */
+            <SortingDemo info={results} ></SortingDemo>
             ))}
-        {/* TODO: Reemplazar la lista por el componente que muestre los productos */}
+            <Paginator first={first} rows={rows} totalRecords={results.length} onPageChange={onPageChange} />
         </div>
     </MainLayout>
   );
