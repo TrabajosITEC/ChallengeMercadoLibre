@@ -3,9 +3,8 @@ import { useLocation } from 'react-router-dom';
 import MainLayout from "../layouts/MainLayout";
 import { ProgressSpinner } from 'primereact/progressspinner';
 import '../index.css';
-import BasicDemo from '../components/card';
 import { Paginator } from 'primereact/paginator';
-import SortingDemo from '../components/card';
+import Card from '../components/Card';
 
 export default function Results() {
   const location = useLocation();
@@ -54,15 +53,11 @@ export default function Results() {
   }
   return (
     <MainLayout>
-        <div>
-        <h1>Resultados de busqueda: {valorBuscado}</h1>
-        
-            {paginatedResults.map((result) => (
-            /*<BasicDemo titulo= {result.title} precio = {result.price} />   */
-            <SortingDemo info={results} ></SortingDemo>
-            ))}
-            <Paginator first={first} rows={rows} totalRecords={results.length} onPageChange={onPageChange} />
-        </div>
+      <div>
+        <h1>Resultados de búsqueda: {valorBuscado}</h1>
+        <Card info={paginatedResults}/>
+        <Paginator first={first} rows={rows} totalRecords={results.length} onPageChange={onPageChange} />
+      </div>
     </MainLayout>
   );
 }
