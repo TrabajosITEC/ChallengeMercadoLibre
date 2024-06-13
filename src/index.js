@@ -2,13 +2,16 @@ import 'primereact/resources/themes/saga-blue/theme.css';
 import 'primereact/resources/primereact.min.css';          
 import 'primeicons/primeicons.css';                        
 import 'primeflex/primeflex.css';                     
+import './index.css';
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { ModeProvider } from './contexts/MainContext';
+
 import Home from './pages/Home';
 import Results from './pages/Results';
+import Detalle from './pages/Detalle';
 
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { PrimeReactProvider } from 'primereact/api';
@@ -33,7 +36,11 @@ const router = createBrowserRouter([
   {
     path: "/results",
     element: <Results />
-  }
+  },
+  {
+    path: "/detalle",
+    element: <Detalle/>
+  },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

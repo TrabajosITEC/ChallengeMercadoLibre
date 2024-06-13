@@ -8,19 +8,23 @@ import { useNavigate } from 'react-router-dom';
 import './Card.css'
 
 export default function Card({ info }) {
+
   const [products, setProducts] = useState([]);
   useEffect(() => {
     setProducts(info); // Este cambio dipara el cambio en el DATAView.
   }, [info]); // El cambio de info dispara el useEffect
 
-  
+  // const [IdProducto , setIdProducto] = useState(0)
   const navigate = useNavigate()
+
   const handleBotonCarrito = (event) => {
     navigate("/")
   };
 
-  const handleDetalleProducto = (event) => {
-    navigate("/")
+  const handleDetalleProducto = (idRecibida) => {
+
+      navigate(`/detalle?id=${idRecibida}`);
+
   };
 
 
@@ -48,7 +52,7 @@ export default function Card({ info }) {
                 <h3 className='marcaProducto'>
                   {product.attributes.find(atr => atr.id === "BRAND" )? product.attributes.find(atr => atr.id === "BRAND" ).value_name : "" }
                 </h3>
-              <Button className='custom-link-button ' label={product.title} onClick={handleDetalleProducto}/>
+              <Button className='custom-link-button '  label={product.title} onClick={() => handleDetalleProducto(product.id)}/>
               <Rating value={Math.floor(Math.random() * 3) + 3} readOnly cancel={false}></Rating>
               {/* TODO: Ver si se puede hacer funcionar */}
               <div className="flex align-items-center gap-3">
