@@ -39,25 +39,31 @@ export default function Card({ info }) {
 
   const itemTemplate = (product, index) => {
     return (
-      <div className="col-12" key={product.id}>
+      <div className="col-11" key={product.id}>
         <div className={classNames('flex flex-column xl:flex-row xl:align-items-start p-4 gap-4', { 'border-top-1 surface-border': index !== 0 })}>
           <img className="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round" src={product.thumbnail} alt={product.title} />
+          {/* TODO: Tamaño maximo de imagenes  */}
           <div className="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
-            <div className="flex flex-column align-items-center sm:align-items-start gap-3">
+            <div className="col-9 flex flex-column align-items-center sm:align-items-start gap-3">
+                <h3 className='marcaProducto'>
+                  {product.attributes.find(atr => atr.id === "BRAND" )? product.attributes.find(atr => atr.id === "BRAND" ).value_name : "" }
+                </h3>
               <Button className='custom-link-button ' label={product.title} onClick={handleDetalleProducto}/>
-              {/* <div className="text-2xl font-bold text-900">{product.title}</div> */}
-              {/* <Rating value={product.installments.rate} readOnly cancel={false}></Rating> */}
+              <Rating value={Math.floor(Math.random() * 3) + 3} readOnly cancel={false}></Rating>
+              {/* TODO: Ver si se puede hacer funcionar */}
               <div className="flex align-items-center gap-3">
+   
                 <span className="flex align-items-center gap-2">
-                  <i className="pi pi-tag"></i>
+                  <i className="pi pi-users"></i>
                   <span className="font-semibold">{product.seller.nickname}</span>
                 </span>
                 {/* <Tag value={product.inventoryStatus} severity={getSeverity(product)}>ACA EL TAG</Tag> */}
               </div>
             </div>
-            <div className="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
-              <span className="text-2xl font-semibold">${product.price}</span>
-              <Button  onClick={handleBotonCarrito} icon="pi pi-shopping-cart" className="p-button-rounded" disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button>
+            <div className="col-3 flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
+              <span className="mt-5 text-2xl font-semibold">${product.price}</span>
+              {/* TODO: Formatear precio */}
+              <Button label='Agregar al carrito'  onClick={handleBotonCarrito} icon="pi pi-plus" className="p-button-rounded mt-1" disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button>
             </div>
           </div>
         </div>

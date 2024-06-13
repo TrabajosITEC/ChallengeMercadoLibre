@@ -30,6 +30,8 @@ export default function Results() {
         const data = await response.json();
         console.log(data)
         setResults(data.results);
+        setFirst(0);
+        setRows(5);
 
       } catch (error) {
         console.error('Error en busqueda de elementos:', error);
@@ -79,7 +81,6 @@ export default function Results() {
 
   const paginatedResults = results.slice(first, first + rows); // Filtra los resultados para la página actual
   
-
   if (loading) {
     
     return (
@@ -93,19 +94,30 @@ export default function Results() {
   }
   return (
     <MainLayout>
-      <div>
-        <h1>Resultados de búsqueda: {valorBuscado}</h1>
-        <Dropdown
-          options={sortOptions}
-          value={sortKey}
-          optionLabel="label"
-          placeholder="Ordenar por precio"
-          onChange={onSortChange}
-          className="w-full sm:w-14rem"
-        />
-        <Card info={paginatedResults}/>
-        <Paginator first={first} rows={rows} totalRecords={results.length} onPageChange={onPageChange} />
+      <div className='grid flex-wrap: wrap text-center '>
+        <div className='row flex flex-row'>
+
+          <div className='col-3'>
+            <h1>"{valorBuscado}"</h1>
+            <p>{results.length} resultados encontrados</p>
+            <Dropdown
+              options={sortOptions}
+              value={sortKey}
+              optionLabel="label"
+              placeholder="Ordenar por precio"
+              onChange={onSortChange}
+              className="w-full sm:w-14rem"
+            />
+          </div>
+
+          <div className='col-9'>      
+            <Card info={paginatedResults}/>
+          </div>
+
+        </div>
       </div>
+            <Paginator first={first} rows={rows} totalRecords={results.length} onPageChange={onPageChange} />
+             {/*TODO: Verificar que ultima pagina cuando no tiene todos los elementos funcione. Ej: "Estudiantes de Rio Cuarto"  */}
     </MainLayout>
   );
 }

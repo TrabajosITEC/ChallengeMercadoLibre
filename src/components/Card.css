@@ -7,9 +7,17 @@
     cursor: pointer; 
     text-decoration: none;
     transition: color 0.05s ease; 
+    text-align: start;
 }
 
 .custom-link-button:hover {
     color: blue; 
     text-decoration: none; 
+}
+
+.marcaProducto {
+    color: black;
+    font-weight: bold;
+    margin: 0px;
+    padding: 0px;
 }
