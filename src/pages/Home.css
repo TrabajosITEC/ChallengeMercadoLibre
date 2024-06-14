@@ -1,0 +1,53 @@
+.carousel-item {
+    position: relative;
+    width: 99vw; /* Full viewport width */
+    overflow: hidden;
+    margin: 0; /* Ensure no margin */
+    padding: 0; /* Ensure no padding */
+  }
+
+.carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Cover the entire area while maintaining aspect ratio */
+}
+
+.p-carousel .p-carousel-prev,
+.p-carousel .p-carousel-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  border: none;
+  padding: 1rem;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.p-carousel .p-carousel-prev {
+  left: 1rem;
+}
+
+.p-carousel .p-carousel-next {
+  right: 1rem;
+}
+
+.p-carousel .p-carousel-prev::before,
+.p-carousel .p-carousel-next::before {
+  font-family: 'primeicons';
+  font-size: 1.2rem;
+  color: #fff;
+  }
+
+.p-carousel .p-carousel-prev::before {
+  content: '\e900'; /* PrimeIcons class for the left arrow */
+}
+
+.p-carousel .p-carousel-next::before {
+  content: '\e901'; /* PrimeIcons class for the right arrow */
+}
+
+body{
+  background-color: rgb(243, 243, 243);
+}
