@@ -7,6 +7,7 @@ import { Dropdown } from 'primereact/dropdown';
 import { Paginator } from 'primereact/paginator';
 import Card from '../components/Card';
 
+
 export default function Results() {
   const location = useLocation();
   const [results, setResults] = useState([]);

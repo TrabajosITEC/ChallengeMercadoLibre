@@ -6,6 +6,7 @@ import { Rating } from 'primereact/rating';
 import { classNames } from 'primereact/utils';
 import { useNavigate } from 'react-router-dom';
 import './Card.css'
+import numeral from 'numeral';
 
 export default function Card({ info }) {
 
@@ -42,6 +43,7 @@ export default function Card({ info }) {
   // };
 
   const itemTemplate = (product, index) => {
+  
     return (
       <div className="col-11" key={product.id}>
         <div className={classNames('flex flex-column xl:flex-row xl:align-items-start p-4 gap-4', { 'border-top-1 surface-border': index !== 0 })}>
@@ -65,7 +67,8 @@ export default function Card({ info }) {
               </div>
             </div>
             <div className="col-3 flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
-              <span className="mt-5 text-2xl font-semibold">${product.price}</span>
+            
+              <span className="mt-5 text-2xl font-semibold">${numeral(product.price).format("0,0.").replace(",",".")}</span>
               {/* TODO: Formatear precio */}
               <Button label='Agregar al carrito'  onClick={handleBotonCarrito} icon="pi pi-plus" className="p-button-rounded mt-1" disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button>
             </div>
