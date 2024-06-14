@@ -68,8 +68,7 @@ export default function Card({ info }) {
             </div>
             <div className="col-3 flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
             
-              <span className="mt-5 text-2xl font-semibold">${numeral(product.price).format("0,0.").replace(",",".")}</span>
-              {/* TODO: Formatear precio */}
+              <span className="mt-5 text-2xl font-semibold">${numeral(product.price).format("0,0.00").replace(/,/g, '#').replace(/\./g, ',').replace(/#/g, '.')}</span>
               <Button label='Agregar al carrito'  onClick={handleBotonCarrito} icon="pi pi-plus" className="p-button-rounded mt-1" disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button>
             </div>
           </div>

@@ -2,6 +2,8 @@ import React from 'react';
 import MainLayout from "../layouts/MainLayout";
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import Galeria from '../components/Galeria';
+import { Avatar } from 'primereact/avatar';
 
 export default function Detalle() {
 
@@ -33,13 +35,8 @@ export default function Detalle() {
   return (
     <MainLayout>
         <div>
-        <h1>Detalle del producto</h1>
-        <p>ID del producto: {id}</p>
-        <h1>{results.title}</h1>
-        <h1>{results.description}</h1>
-        <h1>{results.price}</h1>
-        <img src={results.pictures? results.pictures[5].secure_url :"" } alt="" />
-       
+          <h1>{results.title}</h1>       
+          <Galeria info={results.pictures? results.pictures : []}></Galeria>
         </div>
 
     </MainLayout>
