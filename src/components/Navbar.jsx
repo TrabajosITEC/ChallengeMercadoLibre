@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Menubar } from 'primereact/menubar';
 import { InputText } from 'primereact/inputtext';
-import { ReactComponent as Logo } from '../logo.svg';
+import { ReactComponent as Logo } from '../img/logo.svg';
 import { Avatar } from 'primereact/avatar';
 // import { useContext } from 'react';
 // import { ModeContext } from '../contexts/MainContext';
@@ -73,26 +73,21 @@ export default function Navbar() {
     
     return (
         <div>
-            <div className='grid bg-orange-500'>
-                <div className="col-2 ">
-                    <div className="flex flex-row flex-wrap align-items-center justify-content-center text-center p-1 mt-3 text-white font-bold">
-                       
-                        <a href="/">
+            <div className='grid bg-yellow-500'>
+                <div className="col-2">
+                    <div className="flex align-items-center justify-content-center  mt-3">
+                        <a href="/" className='text-white text-center font-bold no-underline'>
                         <Logo className="App-logo"></Logo>
+                        TiendaReact
                         </a>
-
-                       
-                        <div>
-                            TiendaReact
-                        </div>
                     </div>
                 </div>
                 <div className="col-5">
                     <div className="text-center p-1 mt-3">
                         {/* <InputText style={{ width: '400px' }} placeholder=" Search" type="text"/> */}
-                        <InputText 
+                        <InputText
                             style={{ width: '400px' }} 
-                            placeholder="Buscar productos, marcas y mas..." 
+                            placeholder="Buscar productos, marcas y más..." 
                             type="text" 
                             value={Buscador}
                             onChange={(e) => setBuscador(e.target.value)}
