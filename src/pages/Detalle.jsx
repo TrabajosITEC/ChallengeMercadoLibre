@@ -5,7 +5,6 @@ import { useEffect, useState, useRef } from 'react';
 import numeral from 'numeral';
 import Galeria from '../components/Galeria';
 import { Button } from 'primereact/button';
-import { useCounter } from 'primereact/hooks';
 import { Toast } from 'primereact/toast';
 
 
@@ -14,7 +13,6 @@ export default function Detalle() {
   const location = useLocation();
   const [results, setResults] = useState({});
   const id = new URLSearchParams(location.search).get('id');
-  const { count, increment, decrement} = useCounter(0);
   const toast = useRef(null);
   const showSuccess = (titulo) => {
     toast.current.show({severity:'success', summary: '¡Agregado con exito!', detail:`${titulo}`, life: 3000});
@@ -40,6 +38,22 @@ export default function Detalle() {
     }
   }, [id]); // Se va a ejecutar cada vez que se modifique valor buscado!!
 
+  const agregarAlCarrito = () => {
+    const carrito = JSON.parse(localStorage.getItem('listaCarrito')) || [];
+    const productoExistente = carrito.find(item => item.id === results.id);
+    let carritoActualizado
+    if (productoExistente) {
+      carritoActualizado = carrito.map(item => 
+          item.id === results.id ? { ...item, quantity: item.quantity + 1 } : item
+      );
+  } else {
+      carritoActualizado = [...carrito, { ...results, quantity: 1 }];
+  }
+    localStorage.setItem('listaCarrito', JSON.stringify(carritoActualizado));
+    const totalCarrito = carritoActualizado.reduce((total, item) => total + item.price * item.quantity, 0);
+    localStorage.setItem('totalCarrito', JSON.stringify(totalCarrito));
+    showSuccess(results.title);
+  };
 
   return (
     <MainLayout>
@@ -57,18 +71,9 @@ export default function Detalle() {
                 <div className='flex flex-column'>
                   <Button style={{marginBottom:"10px"}} label="Comprar" raised size="normal" />
                   <Toast ref={toast} />
-                  <Button label="Agregar al carrito" outlined raised size="Normal" onClick={()=>showSuccess(results.title)} />
+                  <Button label="Agregar al carrito" outlined raised size="Normal" onClick={agregarAlCarrito} />
                 </div>
               </div>
-
-              <div className="flex align-items-center justify-content-center mt-6">
-                <div className="flex flex-wrap gap-3">
-                    <Button icon="pi pi-minus" className="p-button-outlined p-button-rounded" onClick={count>=1?decrement: () => {} }></Button>
-                    <span className="font-light text-2xl mb-5">{count}</span>
-                    <Button icon="pi pi-plus" className="p-button-outlined p-button-rounded p-button-success" onClick={increment}></Button>
-                </div>
-              </div>
-
           </div>
 
           </div>

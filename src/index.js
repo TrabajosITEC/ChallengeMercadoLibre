@@ -12,6 +12,7 @@ import { ModeProvider } from './contexts/MainContext';
 import Home from './pages/Home';
 import Results from './pages/Results';
 import Detalle from './pages/Detalle';
+import Carrito from './pages/Carrito';
 
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { PrimeReactProvider } from 'primereact/api';
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
   {
     path: "/detalle",
     element: <Detalle/>
+  },
+  {
+    path: "/carrito",
+    element: <Carrito/>
   },
 ]);
 

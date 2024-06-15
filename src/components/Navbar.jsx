@@ -61,7 +61,7 @@ export default function Navbar() {
         },
         {
             label: 'Carrito',
-            icon: 'pi pi-shopping-cart'
+            icon: 'pi pi-shopping-cart',
         },
     ];
 

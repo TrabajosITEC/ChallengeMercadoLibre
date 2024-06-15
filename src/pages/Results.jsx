@@ -5,7 +5,8 @@ import { ProgressSpinner } from 'primereact/progressspinner';
 import '../index.css';
 import { Dropdown } from 'primereact/dropdown';
 import { Paginator } from 'primereact/paginator';
-import Card from '../components/Card';
+import CardProductos from '../components/CardProductos';
+
 
 
 export default function Results() {
@@ -112,7 +113,7 @@ export default function Results() {
           </div>
 
           <div className='col-9'>      
-            <Card info={paginatedResults}/>
+            <CardProductos info={paginatedResults}/>
           </div>
 
         </div>
