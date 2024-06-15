@@ -7,7 +7,7 @@ import Galeria from '../components/Galeria';
 import { Button } from 'primereact/button';
 import { useCounter } from 'primereact/hooks';
 import { Toast } from 'primereact/toast';
-
+//Hola
 export default function Detalle() {
 
   const [results, setResults] = useState({});
@@ -26,7 +26,7 @@ export default function Detalle() {
   const handlePagoyEnvio = (results) => {
     navigate("/PagoyEnvio", { state: {results, count} })
   }
-  
+
   useEffect(() => {
     const fetchResults = async () => {
       try {
