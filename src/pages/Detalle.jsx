@@ -6,7 +6,7 @@ import numeral from 'numeral';
 import Galeria from '../components/Galeria';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
-
+//Hola
 export default function Detalle() {
 
   const [results, setResults] = useState({});
@@ -18,6 +18,11 @@ export default function Detalle() {
     toast.current.show({severity:'success', summary: '¡Agregado con exito!', detail:`${titulo}`, life: 3000});
   }
   
+  const navigate = useNavigate()
+  const handlePagoyEnvio = (results) => {
+    navigate("/PagoyEnvio", { state: {results, count} })
+  }
+
   useEffect(() => {
     const fetchResults = async () => {
       try {
