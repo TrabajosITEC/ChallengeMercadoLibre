@@ -5,7 +5,7 @@ import { Rating } from 'primereact/rating';
 // import { Tag } from 'primereact/tag';
 import { classNames } from 'primereact/utils';
 import { useNavigate } from 'react-router-dom';
-import './Card.css'
+import './CardProducto.css'
 import numeral from 'numeral';
 
 export default function CardProductos({ info }) {

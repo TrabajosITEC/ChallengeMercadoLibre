@@ -18,8 +18,6 @@ import Results from './pages/Results';
 import Detalle from './pages/Detalle';
 import Carrito from './pages/Carrito';
 
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { PrimeReactProvider } from 'primereact/api';
 
 
 const primeConfig = {
