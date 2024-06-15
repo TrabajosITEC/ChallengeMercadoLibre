@@ -10,7 +10,7 @@ export default function Galeria({info}) {
             const data = info.map(item => ({
                 thumbnailImageSrc: item.url,
                 itemImageSrc: item.secure_url,
-                alt: "50px",
+                
                 title: ""
             }));
             setImages(data);

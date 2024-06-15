@@ -16,6 +16,7 @@ import Detalle from './pages/Detalle';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { PrimeReactProvider } from 'primereact/api';
 
+
 const primeConfig = {
   ripple: true,
   inputStyle: 'outlined',

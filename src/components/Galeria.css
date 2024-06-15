@@ -1,14 +1,14 @@
 
 .p-galleria-item-prev{
-    background-color: rgb(124, 129, 124);
+    background-color: rgb(221, 226, 225);
 }
 
 .p-galleria-item-next {
-    background-color: rgb(124, 129, 124);
+    background-color: rgb(221, 226, 225);
 }
 
 .p-link{
-    background-color: darkgrey;
+    background-color: rgb(221, 226, 225);
 }
 .p-highlight button {
     background-color: #2196f3;

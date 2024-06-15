@@ -1,15 +1,24 @@
 import React from 'react';
 import MainLayout from "../layouts/MainLayout";
 import { useLocation } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
+import numeral from 'numeral';
 import Galeria from '../components/Galeria';
-import { Avatar } from 'primereact/avatar';
+import { Button } from 'primereact/button';
+import { useCounter } from 'primereact/hooks';
+import { Toast } from 'primereact/toast';
+
 
 export default function Detalle() {
 
   const location = useLocation();
   const [results, setResults] = useState({});
   const id = new URLSearchParams(location.search).get('id');
+  const { count, increment, decrement} = useCounter(0);
+  const toast = useRef(null);
+  const showSuccess = (titulo) => {
+    toast.current.show({severity:'success', summary: '¡Agregado con exito!', detail:`${titulo}`, life: 3000});
+  }
   console.log(id)
   
   useEffect(() => {
@@ -34,13 +43,41 @@ export default function Detalle() {
 
   return (
     <MainLayout>
-        <div>
-          <h1>{results.title}</h1>       
-          <Galeria info={results.pictures? results.pictures : []}></Galeria>
+        <div style={{background:"white"}} className ="row grid flex justify-content-center flex-wrap">
+          <div className='col-5'>     
+            <Galeria info={results.pictures? results.pictures : []}></Galeria>
+          </div>
+          <div className='col-4'>
+            <h1 style={{margin:"0px"}}>{results.title}</h1>
+            <span className=" text-5xl font-light">${numeral(results.price).format("0,0.00").replace(/,/g, '#').replace(/\./g, ',').replace(/#/g, '.')}</span>
+
+          <div className='flex flex-row flex-wrap'>
+
+              <div className="flex align-items-center justify-content-center mr-5 mt-6">
+                <div className='flex flex-column'>
+                  <Button style={{marginBottom:"10px"}} label="Comprar" raised size="normal" />
+                  <Toast ref={toast} />
+                  <Button label="Agregar al carrito" outlined raised size="Normal" onClick={()=>showSuccess(results.title)} />
+                </div>
+              </div>
+
+              <div className="flex align-items-center justify-content-center mt-6">
+                <div className="flex flex-wrap gap-3">
+                    <Button icon="pi pi-minus" className="p-button-outlined p-button-rounded" onClick={count>=1?decrement: () => {} }></Button>
+                    <span className="font-light text-2xl mb-5">{count}</span>
+                    <Button icon="pi pi-plus" className="p-button-outlined p-button-rounded p-button-success" onClick={increment}></Button>
+                </div>
+              </div>
+
+          </div>
+
+          </div>
         </div>
+
 
     </MainLayout>
   );
 };
+
 
 
