@@ -17,6 +17,7 @@ import Home from './pages/Home';
 import Results from './pages/Results';
 import Detalle from './pages/Detalle';
 import Carrito from './pages/Carrito';
+import PagoyEnvio from './pages/PagoyEnvio';
 
 
 
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
   {
     path: "/carrito",
     element: <Carrito/>
+  },
+  {
+    path: "/pagoYEnvio",
+    element: <PagoyEnvio/>
   },
 ]);
 

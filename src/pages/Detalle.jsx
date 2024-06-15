@@ -1,6 +1,6 @@
 import React from 'react';
 import MainLayout from "../layouts/MainLayout";
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
 import numeral from 'numeral';
 import Galeria from '../components/Galeria';
@@ -13,6 +13,7 @@ export default function Detalle() {
 
   const location = useLocation();
   const id = new URLSearchParams(location.search).get('id');
+  
   const toast = useRef(null);
   const showSuccess = (titulo) => {
     toast.current.show({severity:'success', summary: '¡Agregado con exito!', detail:`${titulo}`, life: 3000});
@@ -20,7 +21,7 @@ export default function Detalle() {
   
   const navigate = useNavigate()
   const handlePagoyEnvio = (results) => {
-    navigate("/PagoyEnvio", { state: {results, count} })
+    navigate("/PagoyEnvio", { state: {results} })
   }
 
   useEffect(() => {
@@ -73,6 +74,7 @@ export default function Detalle() {
                   <Button style={{marginBottom:"10px"}}
                     label="Comprar"
                     raised size="normal"
+                    onClick={()=>{handlePagoyEnvio(results)}}
                     />
                   <Toast ref={toast} />
                   <Button label="Agregar al carrito" outlined raised size="Normal" onClick={agregarAlCarrito} />
