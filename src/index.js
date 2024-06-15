@@ -7,7 +7,11 @@ import './index.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
+
 import { ModeProvider } from './contexts/MainContext';
+import { PrimeReactProvider } from 'primereact/api';
+
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import Home from './pages/Home';
 import Results from './pages/Results';

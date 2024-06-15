@@ -7,34 +7,30 @@ import Galeria from '../components/Galeria';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 
-
 export default function Detalle() {
 
-  const location = useLocation();
   const [results, setResults] = useState({});
+
+  const location = useLocation();
   const id = new URLSearchParams(location.search).get('id');
   const toast = useRef(null);
   const showSuccess = (titulo) => {
     toast.current.show({severity:'success', summary: '¡Agregado con exito!', detail:`${titulo}`, life: 3000});
   }
-  console.log(id)
   
   useEffect(() => {
     const fetchResults = async () => {
-    
       try {
-        const response = await fetch(`https://api.mercadolibre.com/items/${id}`);
-        const data = await response.json();
+        const response = await fetch(`https://api.mercadolibre.com/items/${id}`)
+        const data = await response.json()
         console.log(data)
         setResults(data)
-       
       } catch (error) {
-        console.error('Error en busqueda de elementos:', error);
+        console.error('Error en busqueda de elementos:', error)
       } 
     };
-
     if (id) {
-      fetchResults();
+      fetchResults()
     }
   }, [id]); // Se va a ejecutar cada vez que se modifique valor buscado!!
 
@@ -69,7 +65,10 @@ export default function Detalle() {
 
               <div className="flex align-items-center justify-content-center mr-5 mt-6">
                 <div className='flex flex-column'>
-                  <Button style={{marginBottom:"10px"}} label="Comprar" raised size="normal" />
+                  <Button style={{marginBottom:"10px"}}
+                    label="Comprar"
+                    raised size="normal"
+                    />
                   <Toast ref={toast} />
                   <Button label="Agregar al carrito" outlined raised size="Normal" onClick={agregarAlCarrito} />
                 </div>
