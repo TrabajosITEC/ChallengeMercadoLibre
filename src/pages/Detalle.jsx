@@ -1,6 +1,6 @@
 import React from 'react';
 import MainLayout from "../layouts/MainLayout";
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
 import numeral from 'numeral';
 import Galeria from '../components/Galeria';
@@ -8,38 +8,40 @@ import { Button } from 'primereact/button';
 import { useCounter } from 'primereact/hooks';
 import { Toast } from 'primereact/toast';
 
-
 export default function Detalle() {
 
-  const location = useLocation();
   const [results, setResults] = useState({});
+
+  const location = useLocation();
   const id = new URLSearchParams(location.search).get('id');
+  
   const { count, increment, decrement} = useCounter(0);
+  
   const toast = useRef(null);
   const showSuccess = (titulo) => {
     toast.current.show({severity:'success', summary: '¡Agregado con exito!', detail:`${titulo}`, life: 3000});
   }
-  console.log(id)
+  
+  const navigate = useNavigate()
+  const handlePagoyEnvio = (results) => {
+    navigate("/PagoyEnvio", { state: {results, count} })
+  }
   
   useEffect(() => {
     const fetchResults = async () => {
-    
       try {
-        const response = await fetch(`https://api.mercadolibre.com/items/${id}`);
-        const data = await response.json();
+        const response = await fetch(`https://api.mercadolibre.com/items/${id}`)
+        const data = await response.json()
         console.log(data)
         setResults(data)
-       
       } catch (error) {
-        console.error('Error en busqueda de elementos:', error);
+        console.error('Error en busqueda de elementos:', error)
       } 
     };
-
     if (id) {
-      fetchResults();
+      fetchResults()
     }
   }, [id]); // Se va a ejecutar cada vez que se modifique valor buscado!!
-
 
   return (
     <MainLayout>
@@ -55,7 +57,11 @@ export default function Detalle() {
 
               <div className="flex align-items-center justify-content-center mr-5 mt-6">
                 <div className='flex flex-column'>
-                  <Button style={{marginBottom:"10px"}} label="Comprar" raised size="normal" />
+                  <Button style={{marginBottom:"10px"}}
+                    label="Comprar"
+                    raised size="normal"
+                    onClick={()=>{handlePagoyEnvio(results)}}
+                    />
                   <Toast ref={toast} />
                   <Button label="Agregar al carrito" outlined raised size="Normal" onClick={()=>showSuccess(results.title)} />
                 </div>
