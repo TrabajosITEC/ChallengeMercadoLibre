@@ -51,7 +51,7 @@ const router = createBrowserRouter([
     element: <Carrito/>
   },
   {
-    path: "/pagoYEnvio",
+    path: "/pagoYenvio",
     element: <PagoyEnvio/>
   },
 ]);
