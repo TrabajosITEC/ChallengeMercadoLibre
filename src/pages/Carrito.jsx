@@ -3,8 +3,11 @@ import { Button } from "primereact/button";
 import MainLayout from "../layouts/MainLayout";
 import { useState, useEffect } from "react";
 import numeral from 'numeral';
+import { useContext} from 'react';
+import { ModeContext } from "../contexts/MainContext";
 
 export default function Carrito(){
+    const { setcarritoCont } = useContext(ModeContext)
     const [carrito,setCarrito] = useState([]);
     const [totalCarrito, setTotalCarrito] = useState(0);
 
@@ -12,6 +15,7 @@ export default function Carrito(){
         const listaCarrito = localStorage.getItem('listaCarrito');
         if (listaCarrito){
             setCarrito(JSON.parse(listaCarrito));
+            
         }
         const precioTotal = JSON.parse(localStorage.getItem('totalCarrito'));
         if (precioTotal) {
@@ -26,6 +30,7 @@ export default function Carrito(){
         const nuevoTotal = carritoActualizado.reduce((total, item) => total + item.price * item.quantity, 0);
         setTotalCarrito(nuevoTotal);
         localStorage.setItem('totalCarrito', JSON.stringify(nuevoTotal));
+        setcarritoCont(carritoActualizado.length)
     }
 
     const actualizarCantidad = (id, cantidad) => {
@@ -40,6 +45,7 @@ export default function Carrito(){
         const nuevoTotal = carritoActualizado.reduce((total, item) => total + item.price * item.quantity, 0);
         setTotalCarrito(nuevoTotal);
         localStorage.setItem('totalCarrito', JSON.stringify(nuevoTotal));
+        setcarritoCont(carritoActualizado.length)
     };
 
     return(

@@ -7,8 +7,12 @@ import { Avatar } from 'primereact/avatar';
 // import { ModeContext } from '../contexts/MainContext';
 import './Navbar.css'
 import { useNavigate } from 'react-router-dom';
+import { useContext} from 'react';
+import { ModeContext } from "../contexts/MainContext";
+
 
 export default function Navbar() {
+    const { carritoCont } = useContext(ModeContext)
 
     const [Buscador, setBuscador] = useState("")
     const navigate = useNavigate()
@@ -19,10 +23,14 @@ export default function Navbar() {
         }
       };
 
+    const handleCarrito = () => {
+        navigate("/carrito")
+    }
+
     const items = [
         {
             label: 'Ubicación',
-            icon: 'pi pi-map-marker'
+            icon: 'pi pi-map-marker',
         },
         {
             label: 'Ofertas',
@@ -60,8 +68,9 @@ export default function Navbar() {
             icon: 'pi pi-envelope',
         },
         {
-            label: 'Carrito',
+            label: `Carrito ${carritoCont}`,
             icon: 'pi pi-shopping-cart',
+            command:  ()=> handleCarrito()
         },
     ];
 

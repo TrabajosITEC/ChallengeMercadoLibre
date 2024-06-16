@@ -6,8 +6,11 @@ import numeral from 'numeral';
 import Galeria from '../components/Galeria';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
-//Hola
+import { useContext} from 'react';
+import { ModeContext } from "../contexts/MainContext";
+
 export default function Detalle() {
+  const { setcarritoCont } = useContext(ModeContext)
 
   const [results, setResults] = useState({});
 
@@ -23,6 +26,7 @@ export default function Detalle() {
   const handlePagoyEnvio = (results) => {
     navigate("/PagoyEnvio", { state: {results} })
   }
+
 
   useEffect(() => {
     const fetchResults = async () => {
@@ -54,6 +58,7 @@ export default function Detalle() {
     localStorage.setItem('listaCarrito', JSON.stringify(carritoActualizado));
     const totalCarrito = carritoActualizado.reduce((total, item) => total + item.price * item.quantity, 0);
     localStorage.setItem('totalCarrito', JSON.stringify(totalCarrito));
+    setcarritoCont(carritoActualizado.length)
     showSuccess(results.title);
   };
 
@@ -84,8 +89,6 @@ export default function Detalle() {
 
           </div>
         </div>
-
-
     </MainLayout>
   );
 };
