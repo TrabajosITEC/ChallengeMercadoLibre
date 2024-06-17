@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Button } from 'primereact/button';
 import { DataView } from 'primereact/dataview';
 import { Rating } from 'primereact/rating';
 // import { Tag } from 'primereact/tag';
 import { classNames } from 'primereact/utils';
 import { useNavigate } from 'react-router-dom';
-import './CardProducto.css'
+import './CardProductos.css'
 import numeral from 'numeral';
+import { ModeContext } from '../contexts/MainContext';
 
 export default function CardProductos({ info }) {
-
+  const { Dolar } = useContext(ModeContext)
   const [products, setProducts] = useState([]);
   useEffect(() => {
     setProducts(info); // Este cambio dipara el cambio en el DATAView.
@@ -68,7 +69,7 @@ export default function CardProductos({ info }) {
             </div>
             <div className="col-3 flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
             
-              <span className="mt-5 text-2xl font-semibold">${numeral(product.price).format("0,0.00").replace(/,/g, '#').replace(/\./g, ',').replace(/#/g, '.')}</span>
+              <span className="mt-5 text-2xl font-semibold">USD {numeral(product.price/Dolar).format("0,0.00").replace(/,/g, '#').replace(/\./g, ',').replace(/#/g, '.')}</span>
               <Button label='Agregar al carrito'  onClick={handleBotonCarrito} icon="pi pi-plus" className="p-button-rounded mt-1" ></Button>
             </div>
           </div>
