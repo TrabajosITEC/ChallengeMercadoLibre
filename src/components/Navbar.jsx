@@ -12,7 +12,7 @@ import { ModeContext } from "../contexts/MainContext";
 import { Button } from 'primereact/button';
 
 export default function Navbar() {
-    const { carritoCont } = useContext(ModeContext)
+    const { carritoCont, Dolar } = useContext(ModeContext)
 
     const [Buscador, setBuscador] = useState("")
     const navigate = useNavigate()
@@ -32,10 +32,7 @@ export default function Navbar() {
     }
 
     const items = [
-        {
-            label: 'Ubicación',
-            icon: 'pi pi-map-marker',
-        },
+
         {
             label: 'Ofertas',
             icon: 'pi pi-tags'
@@ -116,8 +113,10 @@ export default function Navbar() {
                         />
                     </div>
                 </div>
-                <div className="col">
-                    <div className="text-center p-3 border-round-sm bg-primary-reverse font-bold ">3</div>
+                <div className="col-4">
+                    <div className="text-center p-3 border-round-sm bg-primary-reverse font-bold ">
+                        {Dolar}
+                    </div>
                 </div>
             </div>
             <div className="card">
