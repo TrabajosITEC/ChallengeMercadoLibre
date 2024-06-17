@@ -3,7 +3,8 @@ import { createContext, useState } from "react";
 export const ModeContext = createContext()
 
 export const ModeProvider = ({children})=>{
-    const [carritoCont, setcarritoCont] = useState(0)
+    const carrito = JSON.parse(localStorage.getItem('listaCarrito')) || [];
+    const [carritoCont, setcarritoCont] = useState(carrito.length)
     const [Tema, setTema] = useState("fondo");
     const [Modo, setModo] = useState(true)
     const handleTema = (e) => {

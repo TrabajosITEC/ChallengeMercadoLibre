@@ -3,6 +3,7 @@ import MainLayout from "../layouts/MainLayout";
 // import { ProgressBar } from 'primereact/progressbar';
 import { useLocation } from "react-router-dom";
 import ControlledDemo from "../components/Pasos";
+import FormDireccion from "../components/FormDireccion";
 
 export default function PagoyEnvio() {
     // const [avance, setAvance] = useState(0)
@@ -13,10 +14,10 @@ export default function PagoyEnvio() {
     <MainLayout>
         <div style={{background:"white"}} className="card">
             <ControlledDemo></ControlledDemo>
-            <h1>Progreso</h1>
+            <FormDireccion></FormDireccion>
             <p>{results.title}</p>
             <p>{count}</p>
-            {/* <ProgressBar value={avance}></ProgressBar> */}
+            
         </div>
     </MainLayout>
   );
