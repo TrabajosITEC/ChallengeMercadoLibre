@@ -9,7 +9,7 @@ import './Navbar.css'
 import { useNavigate } from 'react-router-dom';
 import { useContext} from 'react';
 import { ModeContext } from "../contexts/MainContext";
-
+import { Button } from 'primereact/button';
 
 export default function Navbar() {
     const { carritoCont } = useContext(ModeContext)
@@ -25,6 +25,10 @@ export default function Navbar() {
 
     const handleCarrito = () => {
         navigate("/carrito")
+    }
+
+    const handleInicio = () => {
+        navigate("/")
     }
 
     const items = [
@@ -85,10 +89,14 @@ export default function Navbar() {
             <div className='grid bg-yellow-500'>
                 <div className="col-2">
                     <div className="flex align-items-center justify-content-center  mt-3">
-                        <a href="/" className='text-white text-center font-bold no-underline'>
-                        <Logo className="App-logo"></Logo>
-                        TiendaReact
-                        </a>
+                        <Button
+                            style={{background:"none", border:"none", boxShadow: "none"}}               
+                            className='text-white text-center font-bold '
+                            onClick={() => handleInicio()}
+                            >
+                            <Logo className="App-logo"></Logo>
+                            TiendaReact
+                        </Button>
                     </div>
                 </div>
                 <div className="col-5">
