@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState,useRef } from 'react';
+import './Navbar.css';
+import { ReactComponent as Logo } from '../img/logo.svg';
 import { Menubar } from 'primereact/menubar';
 import { InputText } from 'primereact/inputtext';
-import { ReactComponent as Logo } from '../img/logo.svg';
-import { Avatar } from 'primereact/avatar';
-// import { useContext } from 'react';
-// import { ModeContext } from '../contexts/MainContext';
-import './Navbar.css'
+import { Button } from 'primereact/button';
 import { useNavigate } from 'react-router-dom';
 import { useContext} from 'react';
 import { ModeContext } from "../contexts/MainContext";
-import { Button } from 'primereact/button';
+import { Dropdown } from 'primereact/dropdown';
+import { OverlayPanel } from 'primereact/overlaypanel';
 
 export default function Navbar() {
     const { carritoCont, Dolar } = useContext(ModeContext)
-
+    const [moneda, setMoneda] = useState({ name: 'Peso', code: 'ARS' })
+    const op = useRef(null);
     const [Buscador, setBuscador] = useState("")
     const navigate = useNavigate()
 
@@ -31,76 +31,27 @@ export default function Navbar() {
         navigate("/")
     }
 
-    const items = [
+    const monedas = [
+        {name:'Peso', code:'ARS'},
+        {name:'Dolar', code:'USD'}
+    ]
 
-        {
-            label: 'Ofertas',
-            icon: 'pi pi-tags'
-        },
-        {
-            label: 'Supermercado',
-            icon: 'pi pi-shop'
-        },
-        {
-            label: 'Moda',
-            icon: 'pi pi-shopping-bag'
-        },
-        {
-            label: 'Categorías',
-            icon: 'pi pi-th-large',
-            items: [
-                {
-                    label: 'Core',
-                    icon: 'pi pi-bolt',
-                    
-                },
-                {
-                    label: 'Blocks',
-                    icon: 'pi pi-server',                   
-                },
-                {
-                    label: 'UI Kit',
-                    icon: 'pi pi-pencil',                 
-                },
-            ]
-        },
-        {
-            label: 'Ayuda',
-            icon: 'pi pi-envelope',
-        },
-        {
-            label: `Carrito ${carritoCont}`,
-            icon: 'pi pi-shopping-cart',
-            command:  ()=> handleCarrito()
-        },
+    const items = [
     ];
 
-    const end = (
-        <div className="flex align-items-center gap-2">
-            <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" shape="circle" />
-        </div>
-    );
-    
-    return (
-        <div>
-            <div className='grid bg-yellow-500'>
-                <div className="col-2">
-                    <div className="flex align-items-center justify-content-center  mt-3">
+    const start = (
+        <div className='justify-content-center'>
                         <Button
                             style={{background:"none", border:"none", boxShadow: "none"}}               
-                            className='text-white text-center font-bold '
+                            className='text-white font-bold'
                             onClick={() => handleInicio()}
                             >
                             <Logo className="App-logo"></Logo>
                             TiendaReact
                         </Button>
-                    </div>
-                </div>
-                <div className="col-5">
-                    <div className="text-center p-1 mt-3">
-                        {/* <InputText style={{ width: '400px' }} placeholder=" Search" type="text"/> */}
                         <InputText
-                            style={{ width: '400px' }} 
+                            style={{ width: '400px', margin: '10px' }} 
+                            className='pt-2'
                             placeholder="Buscar productos, marcas y más..." 
                             type="text" 
                             value={Buscador}
@@ -111,18 +62,24 @@ export default function Navbar() {
                             }
                             }}
                         />
-                    </div>
-                </div>
-                <div className="col-4">
-                    <div className="text-center p-3 border-round-sm bg-primary-reverse font-bold ">
-                        {Dolar}
-                    </div>
-                </div>
-            </div>
-            <div className="card">
-                <Menubar id='navbar' model={items} end={end} />
-            </div>
         </div>
-    )
+    );
+
+    const end = (
+        <div className="flex align-items-center gap-2 ml-auto">
+            <Button label={moneda.code} className="bg-transparent border-yellow-400 text-yellow-400 font-bold" onClick={(e) => op.current.toggle(e)} />
+            <OverlayPanel ref={op}>
+                <Dropdown value={moneda} className='border-transparent' onChange={(e) => setMoneda(e.value)} options={monedas} optionLabel="name"></Dropdown>
+            </OverlayPanel>
+            <Button onClick={handleCarrito} label={`${carritoCont}`} icon="pi pi-shopping-cart" className="bg-transparent border-yellow-400 text-yellow-400 font-bold" />
+            <Button label="Iniciar Sesión" className="bg-transparent border-white text-white" />
+            <Button label="Registrarse" className="bg-transparent text-white border-white" />
+        </div>
+    );
+
+    return (
+        <div className="card">
+            <Menubar className='bg-blue-700 border-none	border-noround justify-content-center flex relative' model={items} start={start} end={end} />
+        </div>
+    );
 }
-        
