@@ -18,8 +18,7 @@ import Results from './pages/Results';
 import Detalle from './pages/Detalle';
 import Carrito from './pages/Carrito';
 import PagoyEnvio from './pages/PagoyEnvio';
-
-
+import MisCompras from './pages/MisCompras';
 
 const primeConfig = {
   ripple: true,
@@ -55,6 +54,10 @@ const router = createBrowserRouter([
   {
     path: "/pagoYenvio",
     element: <PagoyEnvio/>
+  },
+  {
+    path: "/misCompras",
+    element: <MisCompras/>
   },
 ]);
 

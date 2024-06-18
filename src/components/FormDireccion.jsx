@@ -6,10 +6,12 @@ import { ProgressBar } from 'primereact/progressbar';
 import { Checkbox } from "primereact/checkbox";
 import { Toast } from 'primereact/toast';
 import {  useNavigate } from 'react-router-dom';
+import { ConfirmDialog } from 'primereact/confirmdialog';
 
 export default function FormDireccion({ results, count }) {
     const navigate = useNavigate()
 
+    const [visible, setVisible] = useState(false);
     const toast = useRef(null);
 
     const [Calle, setCalle] = useState('')
@@ -71,14 +73,22 @@ export default function FormDireccion({ results, count }) {
         setBarraAvance(BarraAvance - 33)
     }
 
-    const handleConfirmar = () => {
-        toast.current.show({ severity: 'info', summary: 'Compra Exitosa', detail: 'Redirigiendo...', life: 3000 });
+    const accept = () => {
+        toast.current.show({ severity: 'info', summary: 'Compra Exitosa', detail: '¡Felicitaciones!. Redirigiendo...', life: 3000 });
         setBarraAvance(100)
+        const listaCompras = JSON.parse(localStorage.getItem('listaCompras')) || [];
+        const ProdNuevo = {Nombre:results.title, Cantidad:count, TotalPagado: results.price, FormaPago: Pagos, DireccionEnvio: Direccion.Calle  }  
+        let listaActualizada = [...listaCompras, { ...ProdNuevo }];
+        localStorage.setItem('listaCompras', JSON.stringify(listaActualizada));
+        
         setTimeout(() => {
-            navigate("/", { state: { results, count } });
+            navigate("/misCompras", { state: { results, count, Direccion, Pagos } });
         }, 4000); 
         
-        
+    }
+
+    const reject = () => {
+        toast.current.show({ severity: 'warn', summary: 'Aviso', detail: 'Su compra no fue procesada', life: 3000 });
     }
 
     return (
@@ -157,18 +167,27 @@ export default function FormDireccion({ results, count }) {
 
             <div className="flex flex-row flex-wrap shadow-3  justify-content-center">
                 <Toast ref={toast} />
-                <Button 
+                {/* <Button 
                 severity="success" 
                 className="mb-2 mt-2 flex align-items-center justify-content-center"
                 disabled={ConfirmacionPago && ConfirmacionDir  ? false:true}
                 onClick={handleConfirmar}
                 >
                 Confirmar Compra
-                </Button>
+                </Button> */}
+                <ConfirmDialog group="declarative"  visible={visible} onHide={() => setVisible(false)} message="Esta por confirmar su compra. Esta seguro/a?" 
+                header="Confirmacion" icon="pi pi-exclamation-triangle" accept={accept} reject={reject} />
+                <div className="card flex justify-content-center">
+                    <Button 
+                        severity="success" 
+                        onClick={() => setVisible(true)} 
+                        disabled={ConfirmacionPago && ConfirmacionDir  ? false:true}
+                        icon="pi pi-check" 
+                        label="Confirmar Compra" />
+                </div>
             </div>
 
         </div>
 
     )
 }
-        
