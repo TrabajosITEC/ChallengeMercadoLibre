@@ -30,19 +30,6 @@ export default function CardProductos({ info }) {
   };
 
 
-  // const getSeverity = (product) => {
-  //   switch (product.inventoryStatus) {
-  //     case 'INSTOCK':
-  //       return 'success';
-  //     case 'LOWSTOCK':
-  //       return 'warning';
-  //     case 'OUTOFSTOCK':
-  //       return 'danger';
-  //     default:
-  //       return null;
-  //   }
-  // };
-
   const itemTemplate = (product, index) => {
   
     return (
@@ -56,8 +43,7 @@ export default function CardProductos({ info }) {
                   {product.attributes.find(atr => atr.id === "BRAND" )? product.attributes.find(atr => atr.id === "BRAND" ).value_name : "" }
                 </h3>
               <Button className='custom-link-button '  label={product.title} onClick={() => handleDetalleProducto(product.id)}/>
-              <Rating value={Math.floor(Math.random() * 3) + 3} readOnly cancel={false}></Rating>
-              {/* TODO: Ver si se puede hacer funcionar */}
+           
               <div className="flex align-items-center gap-3">
    
                 <span className="flex align-items-center gap-2">
@@ -68,9 +54,8 @@ export default function CardProductos({ info }) {
               </div>
             </div>
             <div className="col-3 flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
-            
-              <span className="mt-5 text-2xl font-semibold">$ {numeral(product.price).format("0,0.00").replace(/,/g, '#').replace(/\./g, ',').replace(/#/g, '.')}</span>
-              <Button label='Agregar al carrito'  onClick={handleBotonCarrito} icon="pi pi-plus" className="p-button-rounded mt-1" ></Button>
+              <span className="mt-5 text-xl font-semibold">$ {numeral(product.price).format("0,0.00").replace(/,/g, '#').replace(/\./g, ',').replace(/#/g, '.')}</span>
+              <Rating value={Math.floor(Math.random() * 3) + 3} readOnly cancel={false}></Rating>
             </div>
           </div>
         </div>

@@ -100,7 +100,7 @@ export default function Results() {
         <div className='row flex flex-row'>
 
           <div className='col-3'>
-            <h1>"{valorBuscado}"</h1>
+            <h2>"{valorBuscado}"</h2>
             <p>{results.length} resultados encontrados</p>
             <Dropdown
               options={sortOptions}
