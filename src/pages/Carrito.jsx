@@ -11,6 +11,7 @@ export default function Carrito(){
     const [carrito,setCarrito] = useState([]);
     const [totalCarrito, setTotalCarrito] = useState(0);
 
+
     useEffect(()=>{
         const listaCarrito = localStorage.getItem('listaCarrito');
         if (listaCarrito){
@@ -51,34 +52,56 @@ export default function Carrito(){
     return(
         <MainLayout>
             <div className="flex row">
-                <ul className="col-8">
+                <ul className="col-8 mt-0">
                     {
                     carrito.map(product => (
             
-                    <li key={product.id}>
-                        <Card title={product.title} subTitle={'Precio unitario: $'+ product.price}>
-                            <div className="flex flex-wrap gap-3">
-                                <Button
-                                    icon="pi pi-minus"
-                                    className="p-button-outlined p-button-rounded"
-                                    onClick={() => actualizarCantidad(product.id, product.quantity > 1 ? product.quantity - 1 : 1)}
-                                ></Button>
-                                    <span className="font-light text-2xl mb-5">{product.quantity}</span>
-                                <Button
-                                    icon="pi pi-plus"
-                                    className="p-button-outlined p-button-rounded p-button-success"
-                                    onClick={() => actualizarCantidad(product.id, product.quantity + 1)}
-                                ></Button>
-                                <p>Subtotal: {numeral(product.quantity * product.price).format('$0,0.00')}</p>
+                    <li key={product.id} className="list-none mb-2">
+                        <Card title={product.title} subTitle={'Precio unitario: $' + product.price} className="">
+                            <div className="grid align-items-center">
+                                <div className="col-3 flex align-items-center gap-3">
+                                    <Button
+                                        icon="pi pi-minus"
+                                        className="p-button-outlined p-button-rounded"
+                                        onClick={() => actualizarCantidad(product.id, product.quantity > 1 ? product.quantity - 1 : 1)}
+                                    ></Button>
+                                    <span className="font-light text-2xl w-2rem text-center">{product.quantity}</span>
+                                    <Button
+                                        icon="pi pi-plus"
+                                        className="p-button-outlined p-button-rounded p-button-success"
+                                        onClick={() => actualizarCantidad(product.id, product.quantity + 1)}
+                                    ></Button>
+                                </div>
+                                <div className="col-6">
+                                    <p className="text-xl text-center w-8rem">Subtotal: {numeral(product.quantity * product.price).format('$0,0.00')}</p>
+                                </div>
+                                <div className="col-2 flex justify-content-end">
+                                    <Button 
+                                        label="Eliminar"
+                                        icon="pi pi-trash" 
+                                        severity="danger" 
+                                        className="bg-red-500" 
+                                        onClick={() => eliminarDelCarrito(product.id)}
+                                    ></Button>
+                                </div>
                             </div>
-                            <Button icon='pi pi-trash' label="Eliminar" severity="danger" className="bg-red-500" onClick={() => eliminarDelCarrito(product.id)}></Button>
                         </Card>
                     </li>
                     ))}
                 </ul>
                 <div className="col-4">
                     <Card title={'Resumen de Compra'}>
-                        <p>Total: {numeral(totalCarrito).format('$0,0.00')}</p>
+                        <div className="grid mt-1">
+                            <div className="col-7">
+                                <p className="font-bold">Total: {numeral(totalCarrito).format('$0,0.00')}</p>
+                            </div>
+                            <div className="col-5 pt-2">
+                                <Button style={{marginBottom:"10px"}}
+                                label="Comprar"
+                                raised size="normal"
+                                />
+                            </div>
+                        </div>
                     </Card>
                 </div>
             </div>
