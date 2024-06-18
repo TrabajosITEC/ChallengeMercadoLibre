@@ -30,6 +30,10 @@ export default function Navbar() {
     const handleInicio = () => {
         navigate("/")
     }
+    
+    const handleMisCompras = () => {
+        navigate("/misCompras")
+    }
 
     const monedas = [
         {name:'Peso', code:'ARS'},
@@ -72,6 +76,7 @@ export default function Navbar() {
                 <Dropdown value={moneda} className='border-transparent' onChange={(e) => setMoneda(e.value)} options={monedas} optionLabel="name"></Dropdown>
             </OverlayPanel>
             <Button onClick={handleCarrito} label={`${carritoCont}`} icon="pi pi-shopping-cart" className="bg-transparent border-yellow-400 text-yellow-400 font-bold" />
+            <Button onClick={handleMisCompras} label="Mis Compras" className="bg-transparent border-white text-white" />
             <Button label="Iniciar Sesión" className="bg-transparent border-white text-white" />
             <Button label="Registrarse" className="bg-transparent text-white border-white" />
         </div>

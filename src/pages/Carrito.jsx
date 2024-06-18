@@ -102,20 +102,14 @@ export default function Carrito(){
                                 <p className="font-bold">Total: {numeral(totalCarrito).format('$0,0.00')}</p>
                             </div>
                             <div className="col-5 pt-2">
-                                <Button style={{marginBottom:"10px"}}
+                            <Button style={{marginBottom:"10px"}}
                                 label="Comprar"
                                 raised size="normal"
-                                />
+                                onClick={()=>{handlePagoyEnvio()}}
+                            />
                             </div>
                         </div>
                     </Card>
-                    <div className='flex flex-column'>
-                        <Button style={{marginBottom:"10px"}}
-                            label="Comprar"
-                            raised size="normal"
-                            onClick={()=>{handlePagoyEnvio()}}
-                        />
-                    </div>
                 </div>
             </div>
         </MainLayout>

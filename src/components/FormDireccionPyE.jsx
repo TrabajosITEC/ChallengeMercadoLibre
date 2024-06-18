@@ -204,8 +204,8 @@ export default function FormDireccionPyE({ results, count }) {
                 >
                 Confirmar Compra
                 </Button> */}
-                <ConfirmDialog group="declarative"  visible={visible} onHide={() => setVisible(false)} message="Esta por confirmar su compra. Esta seguro/a?" 
-                header="Confirmacion" icon="pi pi-exclamation-triangle" accept={accept} reject={reject} />
+                <ConfirmDialog group="declarative"  visible={visible} onHide={() => setVisible(false)} message="Está por confirmar su compra. Está seguro/a?" acceptLabel='Si'
+                header="Confirmación" icon="pi pi-exclamation-triangle" accept={accept} reject={reject} />
                 <div className="card flex justify-content-center">
                     <Button 
                         severity="success" 
