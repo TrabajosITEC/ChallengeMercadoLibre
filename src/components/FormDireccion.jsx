@@ -1,15 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { AutoComplete } from "primereact/autocomplete";
 import { Button } from 'primereact/button';
 import { Message } from 'primereact/message';
 import { ProgressBar } from 'primereact/progressbar';
 import { Checkbox } from "primereact/checkbox";
+import { Toast } from 'primereact/toast';
+import {  useNavigate } from 'react-router-dom';
 
-export default function FormDireccion() {
+export default function FormDireccion({ results, count }) {
+    const navigate = useNavigate()
+
+    const toast = useRef(null);
+
     const [Calle, setCalle] = useState('')
     const [Altura, setAltura] = useState('')
     const [Ciudad, setCiudad] = useState('')
     const [CodigoPostal, setCodigoPostal] = useState('')
+    const [Direccion, setDireccion] = useState({Calle:"",Altura:"",Ciudad:"",CodigoPostal:""})
     
     const [AdvertenciaDir, setAdvertenciaDir] = useState(false)
     const [ConfirmacionDir, setConfirmacionDir] = useState(false)
@@ -36,11 +43,10 @@ export default function FormDireccion() {
         if (Calle === "" || Altura === "" || Ciudad === "" || CodigoPostal === "") {
             setAdvertenciaDir(true)
         } else {
-            let direccion = {Calle, Altura, Ciudad, CodigoPostal}
             setAdvertenciaDir(false)
             setConfirmacionDir(true)
             setBarraAvance(BarraAvance + 33)
-            return direccion
+            setDireccion({Calle, Altura, Ciudad, CodigoPostal}) 
         }
     }
 
@@ -59,13 +65,21 @@ export default function FormDireccion() {
             console.log(Pagos)
         }
     }
-
+    
     const handleEditarPago = () => {
         setConfirmacionPago(false)
         setBarraAvance(BarraAvance - 33)
     }
 
-
+    const handleConfirmar = () => {
+        toast.current.show({ severity: 'info', summary: 'Compra Exitosa', detail: 'Redirigiendo...', life: 3000 });
+        setBarraAvance(100)
+        setTimeout(() => {
+            navigate("/", { state: { results, count } });
+        }, 4000); 
+        
+        
+    }
 
     return (
         <div className="flex flex-column">
@@ -86,19 +100,19 @@ export default function FormDireccion() {
             <div className="flex flex-row flex-wrap">
                 <div className="card flex flex-column justify-content-center mt-1 col-6 shadow-3">
                     <span className="p-float-label mb-5 ml-5 mt-3 ">
-                        <AutoComplete disabled={ConfirmacionDir? true:false} size={75} inputId="ac" value={Calle}  onChange={(e) => setCalle(e.value)} />
+                        <AutoComplete disabled={ConfirmacionDir? true:false} size={45} inputId="ac" value={Calle}  onChange={(e) => setCalle(e.value)} />
                         <label htmlFor="ac">Calle</label>
                     </span>
                     <span className="p-float-label mb-5 ml-5">
-                        <AutoComplete disabled={ConfirmacionDir? true:false} size={75} inputId="ad" value={Altura}  onChange={(e) => setAltura(e.value)} />
+                        <AutoComplete disabled={ConfirmacionDir? true:false} size={45} inputId="ad" value={Altura}  onChange={(e) => setAltura(e.value)} />
                         <label htmlFor="ad">Altura</label>
                     </span>
                     <span className="p-float-label mb-5 ml-5">
-                        <AutoComplete disabled={ConfirmacionDir? true:false} size={75} inputId="ae" value={Ciudad}  onChange={(e) => setCiudad(e.value)} />
+                        <AutoComplete disabled={ConfirmacionDir? true:false} size={45} inputId="ae" value={Ciudad}  onChange={(e) => setCiudad(e.value)} />
                         <label htmlFor="ae">Ciudad</label>
                     </span>
                     <span className="p-float-label mb-5 ml-5">
-                        <AutoComplete disabled={ConfirmacionDir? true:false} size={75} inputId="af" value={CodigoPostal}  onChange={(e) => setCodigoPostal(e.value)} />
+                        <AutoComplete disabled={ConfirmacionDir? true:false} size={45} inputId="af" value={CodigoPostal}  onChange={(e) => setCodigoPostal(e.value)} />
                         <label htmlFor="af">Codigo Postal</label>
                     </span>
                     <div className="flex flex-row flex-wrap">
@@ -129,18 +143,30 @@ export default function FormDireccion() {
                             <Checkbox disabled={ConfirmacionPago? true:false} inputId="forma4" name="formaPago" value="Cheque electronico" onChange={onPagosChange} checked={Pagos.includes('Cheque electronico')} />
                             <label htmlFor="forma4" className="ml-2">Cheque electronico</label>
                         </div>
-                        <div className="flex flex-row flex-wrap">
-                        { ConfirmacionPago ? 
-                            <Button className="ml-5 mb-2 bg-yellow-500 border-transparent text-black-alpha-90" style={{width:"200px"}} onClick={handleEditarPago} >Editar</Button>
-                            :
-                            <Button className="ml-5 mb-2" style={{width:"200px"}} onClick={handlePago} >Confirmar direccion</Button>
-                        }                        
-                    </div>  
+                        <div className="flex flex-row flex-wrap" style={{marginTop: "87px"}}>
+                            { ConfirmacionPago ? 
+                                <Button className="ml-5 mb-2 bg-yellow-500 border-transparent text-black-alpha-90" style={{width:"200px"}} onClick={handleEditarPago} >Editar</Button>
+                                :
+                                <Button className="ml-5 mb-2" style={{width:"200px"}} onClick={handlePago} >Confirmar forma pago</Button>
+                            }                        
+                        </div>  
                         {AdvertenciaPago && <Message severity="warn" text="Deben seleccionar al menos un metodo de pago" />}
                         {ConfirmacionPago && <Message severity="success" text="Forma de pago confirmada" />}
                 </div>
-
             </div>
+
+            <div className="flex flex-row flex-wrap shadow-3  justify-content-center">
+                <Toast ref={toast} />
+                <Button 
+                severity="success" 
+                className="mb-2 mt-2 flex align-items-center justify-content-center"
+                disabled={ConfirmacionPago && ConfirmacionDir  ? false:true}
+                onClick={handleConfirmar}
+                >
+                Confirmar Compra
+                </Button>
+            </div>
+
         </div>
 
     )
