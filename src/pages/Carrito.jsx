@@ -2,6 +2,7 @@ import { Card } from "primereact/card";
 import { Button } from "primereact/button";
 import MainLayout from "../layouts/MainLayout";
 import { useState, useEffect } from "react";
+import {  useNavigate } from 'react-router-dom';
 import numeral from 'numeral';
 import { useContext} from 'react';
 import { ModeContext } from "../contexts/MainContext";
@@ -48,6 +49,11 @@ export default function Carrito(){
         setcarritoCont(carritoActualizado.length)
     };
 
+    const navigate = useNavigate()
+    const handlePagoyEnvio = () => {
+      navigate("/PagoyEnvioCarrito" , { state: { carrito, totalCarrito } })
+    }
+
     return(
         <MainLayout>
             <div className="flex row">
@@ -80,6 +86,13 @@ export default function Carrito(){
                     <Card title={'Resumen de Compra'}>
                         <p>Total: {numeral(totalCarrito).format('$0,0.00')}</p>
                     </Card>
+                    <div className='flex flex-column'>
+                        <Button style={{marginBottom:"10px"}}
+                            label="Comprar"
+                            raised size="normal"
+                            onClick={()=>{handlePagoyEnvio()}}
+                        />
+                    </div>
                 </div>
             </div>
         </MainLayout>

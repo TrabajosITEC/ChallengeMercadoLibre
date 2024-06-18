@@ -17,6 +17,7 @@ import Home from './pages/Home';
 import Results from './pages/Results';
 import Detalle from './pages/Detalle';
 import Carrito from './pages/Carrito';
+import PagoyEnvioCarrito from './pages/PagoyEnvioCarrito';
 import PagoyEnvio from './pages/PagoyEnvio';
 import MisCompras from './pages/MisCompras';
 
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
   {
     path: "/pagoYenvio",
     element: <PagoyEnvio/>
+  },
+  {
+    path: "/pagoYenvioCarrito",
+    element: <PagoyEnvioCarrito/>
   },
   {
     path: "/misCompras",

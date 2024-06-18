@@ -8,7 +8,7 @@ import { Toast } from 'primereact/toast';
 import {  useNavigate } from 'react-router-dom';
 import { ConfirmDialog } from 'primereact/confirmdialog';
 
-export default function FormDireccion({ results, count }) {
+export default function FormDireccionPyE({ results, count }) {
     const navigate = useNavigate()
 
     const [visible, setVisible] = useState(false);
@@ -73,20 +73,48 @@ export default function FormDireccion({ results, count }) {
         setBarraAvance(BarraAvance - 33)
     }
 
+    // const accept = (results, count) => {
+    //     toast.current.show({ severity: 'info', summary: 'Compra Exitosa', detail: '¡Felicitaciones!. Redirigiendo...', life: 3000 });
+    //     setBarraAvance(100)
+    //     const listaCompras = JSON.parse(localStorage.getItem('listaCompras')) || [];
+    //     results.forEach(results => {
+    //         let formaPago = Pagos.join(" - ")
+    //         const ProdNuevo = {Nombre:results.title,Imagen:results.thumbnail, Cantidad:count, TotalPagado: results.price*count, FormaPago: formaPago, DireccionEnvio: `${Direccion.Calle} ${Direccion.Altura}, ${Direccion.Ciudad} - ${Direccion.CodigoPostal}`  }  
+    //         listaCompras.push(ProdNuevo)
+    //     });
+    //     // let listaActualizada = [...listaCompras, { ...ProdNuevo }];
+    //     localStorage.setItem('listaCompras', JSON.stringify(listaCompras));
+        
+    //     setTimeout(() => {
+    //         navigate("/misCompras", { state: { results, count, Direccion, Pagos } });
+    //     }, 4000); 
+        
+    // }
+
     const accept = () => {
         toast.current.show({ severity: 'info', summary: 'Compra Exitosa', detail: '¡Felicitaciones!. Redirigiendo...', life: 3000 });
-        setBarraAvance(100)
+        setBarraAvance(100);
         const listaCompras = JSON.parse(localStorage.getItem('listaCompras')) || [];
-        let formaPago = Pagos.join(" - ")
-        const ProdNuevo = {Nombre:results.title,Imagen:results.thumbnail, Cantidad:count, TotalPagado: results.price*count, FormaPago: formaPago, DireccionEnvio: `${Direccion.Calle} ${Direccion.Altura}, ${Direccion.Ciudad} - ${Direccion.CodigoPostal}`  }  
-        let listaActualizada = [...listaCompras, { ...ProdNuevo }];
-        localStorage.setItem('listaCompras', JSON.stringify(listaActualizada));
-        
+        results.forEach(result => {
+            let formaPago = Pagos.join(" - ");
+            const ProdNuevo = {
+                Nombre: result.title,
+                Imagen: result.thumbnail,
+                Cantidad: result.quantity,
+                TotalPagado: result.price * result.quantity ,
+                FormaPago: formaPago,
+                DireccionEnvio: `${Direccion.Calle} ${Direccion.Altura}, ${Direccion.Ciudad} - ${Direccion.CodigoPostal}`
+            };
+            listaCompras.push(ProdNuevo);
+        });
+        localStorage.setItem('listaCompras', JSON.stringify(listaCompras));
+
         setTimeout(() => {
             navigate("/misCompras", { state: { results, count, Direccion, Pagos } });
-        }, 4000); 
-        
-    }
+        }, 4000);
+    };
+
+
 
     const reject = () => {
         toast.current.show({ severity: 'warn', summary: 'Aviso', detail: 'Su compra no fue procesada.', life: 3000 });
