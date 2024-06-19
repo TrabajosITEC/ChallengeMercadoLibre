@@ -12,12 +12,12 @@ export default function PagoyEnvioCarrito() {
     const { carrito ,totalCarrito } = location.state || {}
     const results = carrito
     const count = carrito.length
-    const { Dolar } = useContext(ModeContext)
+    const { Dolar, Modo} = useContext(ModeContext)
 
 
   return (
     <MainLayout>
-        <div style={{background:"white"}} className="flex flex-row flex-wrap">
+        <div style={Modo ? {background:"white"}:{backgroundColor:"rgb(37, 41, 37)"} } className="flex flex-row flex-wrap">
                   <div className=" compra-resumen flex flex-column col-2 shadow-3">
                     <h3>Tu Compra</h3>
                       <p>{`Productos Comprados: ${carrito.length}`}</p>

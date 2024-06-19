@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext} from 'react';
 import { useLocation } from 'react-router-dom';
 import MainLayout from "../layouts/MainLayout";
 import { ProgressSpinner } from 'primereact/progressspinner';
@@ -6,10 +6,11 @@ import '../index.css';
 import { Dropdown } from 'primereact/dropdown';
 import { Paginator } from 'primereact/paginator';
 import CardProductos from '../components/CardProductos';
-
+import { ModeContext } from '../contexts/MainContext';
 
 
 export default function Results() {
+  const { Modo} = useContext(ModeContext)
   const location = useLocation();
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -112,7 +113,7 @@ export default function Results() {
             />
           </div>
 
-          <div className='col-9'>      
+          <div style={ Modo ? {}: {backgroundColor:"rgb(37, 41, 37)"}} className='col-9'>      
             <CardProductos info={paginatedResults}/>
           </div>
 

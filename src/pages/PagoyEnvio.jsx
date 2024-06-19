@@ -8,12 +8,12 @@ import numeral from 'numeral';
 
 export default function PagoyEnvio() {
     const location = useLocation()
-    const { Dolar } = useContext(ModeContext)
+    const { Dolar ,Modo} = useContext(ModeContext)
     const { results, count } = location.state || {}
 
   return (
     <MainLayout>
-        <div style={{background:"white"}} className="flex flex-row flex-wrap">
+        <div style={Modo ? {background:"white"}:{backgroundColor:"rgb(37, 41, 37)"} } className="flex flex-row flex-wrap">
                   <div className=" compra-resumen flex flex-column col-2 shadow-3">
                     <h3>Tu Compra</h3>
                       <p>{`${results.title}`}</p>

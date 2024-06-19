@@ -8,7 +8,7 @@ import { Button } from 'primereact/button';
 import { ModeContext } from '../contexts/MainContext';
 
 export default function CardHome({ id }) {
-    const { Dolar, moneda } = useContext(ModeContext)
+    const { Dolar, moneda, Modo, Tema } = useContext(ModeContext)
 
     const [results, setResults] = useState({});
     const navigate = useNavigate()
@@ -35,7 +35,7 @@ export default function CardHome({ id }) {
     const footer = (
         <div className="card-footer">
             {/* <span className="text-xl font-semibold">$ {numeral(results.price).format("0,0.00")}</span> */}
-            <span className=" text-xl font-semibold">  
+            <span className={`text-xl font-semibold ${Tema}`}>  
                 {
                   moneda.code === results.currency_id ? 
                   `${results.currency_id} ${numeral(results.price).format("0,0.00").replace(/,/g, '#').replace(/\./g, ',').replace(/#/g, '.')}` 
@@ -54,11 +54,17 @@ export default function CardHome({ id }) {
 
         return (
             <div className="card-container flex justify-content-center">
-            <Card className="lg:w-25rem h-25rem card-content" footer={footer}>
+            <Card className="lg:w-25rem h-25rem card-content" style={ Modo ? {}: {backgroundColor:"rgb(37, 41, 37)"}} footer={footer}>
                 <div className="card-content-inner">
+
                     <img className="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round" src={results.thumbnail} alt={results.title} />
-                    <h5 className="text-center">{results.attributes?.find(atr => atr.id === "BRAND")?.value_name || ""}</h5>
-                    <Button className='custom-link-button text-sm font-bold'  label={results.title} onClick={() => handleDetalleProducto(results.id)}/>
+                    <h5 
+                        style={ Modo ? {}: {color:"white"}}
+                        className="text-center"
+                    >
+                        {results.attributes?.find(atr => atr.id === "BRAND")?.value_name || ""}
+                    </h5>
+                    <Button style={ Modo ? {}: {color:"white"}} className='custom-link-button text-sm font-bold'  label={results.title} onClick={() => handleDetalleProducto(results.id)}/>
                 </div>
             </Card>
         </div>

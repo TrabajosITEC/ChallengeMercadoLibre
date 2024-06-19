@@ -33,3 +33,15 @@ code {
   height: 100vh; 
   text-align: center;
 }
+
+.dark {
+  background-color: rgb(24, 22, 22);
+  color: aliceblue;
+  /* filter: invert(1); */
+}
+
+
+.asd{
+
+  background-color: rgb(37, 41, 37);
+}

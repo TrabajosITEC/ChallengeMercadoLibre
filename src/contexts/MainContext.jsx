@@ -7,16 +7,18 @@ export const ModeProvider = ({children})=>{
 
     const [totalCarritoCont, setTotalCarritoCont] = useState(false);
     const [carritoCont, setcarritoCont] = useState(carrito.length)
+    
     const [moneda, setMoneda] = useState({ name: 'Peso', code: 'ARS' })
-    const [Tema, setTema] = useState("fondo");
-    const [Modo, setModo] = useState(true)
     const [Dolar,setDolar] = useState(0)
+
+    const [Tema, setTema] = useState("light");
+    const [Modo, setModo] = useState(true)
     const handleTema = (e) => {
         setModo(!Modo)
         if (Modo === false) {
-          setTema("fondo");
+          setTema("light");
         } else {
-          setTema("fondo2");
+          setTema("dark");
         }
       };
 
@@ -34,7 +36,7 @@ export const ModeProvider = ({children})=>{
       fetchResults()
     }, []);
 
-    const data = { Tema, handleTema, carritoCont, setcarritoCont, Dolar,moneda, setMoneda, totalCarritoCont, setTotalCarritoCont };
+    const data = { Modo, Tema, handleTema, carritoCont, setcarritoCont, Dolar,moneda, setMoneda, totalCarritoCont, setTotalCarritoCont };
     return(
         <ModeContext.Provider value={data}>
             {children}

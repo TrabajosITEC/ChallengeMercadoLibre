@@ -5,12 +5,12 @@ import image2 from '../img/carousel2.jpg';
 import image3 from '../img/carousel3.jpg';
 import image4 from '../img/carousel4.jpg';
 import CardHome from "../components/CardHome";
+import { useContext } from "react";
+import { ModeContext } from '../contexts/MainContext';
 import './Home.css'
 
-
 export default function Home() {
-  
-
+  const {Tema} = useContext(ModeContext) 
   const carouselImages = [
     { id: 1, image: image1, alt: 'Imagen 1' },
     { id: 2, image: image2, alt: 'Imagen 2' },
@@ -41,7 +41,7 @@ export default function Home() {
       </div>
         <h2>Recomendaciones</h2>
         <div class="grid">
-            <div class="col-12 md:col-6 lg:col-3">
+            <div class={`col-12 md:col-6 lg:col-3 ${Tema}`}>
               <CardHome id="MLA835862033"/>
             </div>
             <div class="col-12 md:col-6 lg:col-3">

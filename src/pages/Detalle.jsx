@@ -11,7 +11,7 @@ import { useContext} from 'react';
 import { ModeContext } from "../contexts/MainContext";
 
 export default function Detalle() {
-  const { setcarritoCont,Dolar,moneda,setTotalCarritoCont } = useContext(ModeContext)
+  const { setcarritoCont,Dolar,moneda,setTotalCarritoCont, Modo } = useContext(ModeContext)
   
 
   const [results, setResults] = useState({});
@@ -69,13 +69,13 @@ export default function Detalle() {
 
   return (
     <MainLayout>
-        <div className ="row grid flex justify-content-center flex-wrap bg-white-alpha-90">
-          <div className='col-6'>     
+        <div  className ={`"row grid flex justify-content-center flex-wrap ${Modo?"bg-white-alpha-90":""}`} style={ Modo ? {}: {backgroundColor:"rgb(37, 41, 37)"}}>
+          <div  style={ Modo ? {}: {backgroundColor:"rgb(37, 41, 37)"}} className='col-6'>     
             <Galeria info={results.pictures? results.pictures : []}></Galeria>
           </div>
-          <div className='col-3 justify-content-center'>
-            <h1 className='m-1 text-3xl truncated-text'>{results.title}</h1>
-            <span className="text-3xl font-light">  
+          <div style={ Modo ? {}: {backgroundColor:"rgb(37, 41, 37)"}} className='col-3 justify-content-center'>
+            <h1 style={ Modo ? {}: {color:"white"}} className='m-1 text-3xl '>{results.title}</h1>
+            <span style={ Modo ? {}: {color:"white"}} className="text-3xl font-light">  
                 {
                   moneda.code === results.currency_id ? 
                   `${results.currency_id} ${numeral(results.price).format("0,0.00").replace(/,/g, '#').replace(/\./g, ',').replace(/#/g, '.')}` 
@@ -88,7 +88,7 @@ export default function Detalle() {
                         : ""                  
                       } 
                 </span>
-          <div className='flex flex-row flex-wrap'>
+          <div style={ Modo ? {}: {backgroundColor:"rgb(37, 41, 37)"}} className='flex flex-row flex-wrap'>
 
               <div className="flex align-items-center ml-4 mt-3">
                 <div className='flex flex-column'>

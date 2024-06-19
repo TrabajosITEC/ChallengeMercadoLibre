@@ -9,9 +9,13 @@ import { useContext} from 'react';
 import { ModeContext } from "../contexts/MainContext";
 import { Dropdown } from 'primereact/dropdown';
 import { OverlayPanel } from 'primereact/overlaypanel';
+import { InputSwitch } from "primereact/inputswitch";
+
 
 export default function Navbar() {
-    const { carritoCont, moneda, setMoneda } = useContext(ModeContext)
+    const { carritoCont, moneda, setMoneda, handleTema, Tema } = useContext(ModeContext)
+
+    const [checked, setChecked] = useState(false);
     
     const op = useRef(null);
     const [Buscador, setBuscador] = useState("")
@@ -55,7 +59,7 @@ export default function Navbar() {
                         </Button>
                         <InputText
                             style={{ width: '400px', margin: '10px' }} 
-                            className='pt-2'
+                            className={`pt-2 ${Tema} `}
                             placeholder="Buscar productos, marcas y más..." 
                             type="text" 
                             value={Buscador}
@@ -71,6 +75,10 @@ export default function Navbar() {
 
     const end = (
         <div className="flex align-items-center gap-2 ml-auto">
+            <div className="card flex justify-content-center">
+                <InputSwitch checked={checked} onChange={(e) => {setChecked(e.value); handleTema()} } />
+                {console.log(Tema)}
+            </div>
             <Button label={moneda.code} className="bg-transparent border-yellow-400 text-yellow-400 font-bold" onClick={(e) => op.current.toggle(e)} />
             <OverlayPanel ref={op}>
                 <Dropdown value={moneda} className='border-transparent' onChange={(e) => setMoneda(e.value)} options={monedas} optionLabel="name"></Dropdown>

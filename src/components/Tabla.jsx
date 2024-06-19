@@ -10,7 +10,7 @@ export default function Tabla() {
 
     useEffect(()=>{
         const compras = JSON.parse(localStorage.getItem('listaCompras')) || [];
-        setProducts(compras)
+        setProducts(compras.reverse())
     },[]);
 
     console.log("Hola")
