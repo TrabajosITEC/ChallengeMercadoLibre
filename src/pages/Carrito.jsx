@@ -64,7 +64,7 @@ export default function Carrito(){
             
                     <li key={product.id} className="list-none mb-2">
                         <Card title={product.title} subTitle={
-                            moneda.code === 'ARS' ?('Precio unitario: $' + numeral(product.price).format('0,0.00')):('Precio unitario: USD' + numeral(product.price/Dolar).format('0,0.00'))} className="">
+                            moneda.code === 'ARS' ?('Precio unitario: $' + numeral(product.price).format('0,0.00')):('Precio unitario: USD' + numeral(product.price/Dolar).format('0,0.00'))}>
                             <div className="grid align-items-center">
                                 <div className="col-3 flex align-items-center gap-3">
                                     <Button

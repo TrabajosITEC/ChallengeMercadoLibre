@@ -69,13 +69,13 @@ export default function Detalle() {
 
   return (
     <MainLayout>
-        <div style={{background:"white"}} className ="row grid flex justify-content-center flex-wrap">
-          <div className='col-5'>     
+        <div className ="row grid flex justify-content-center flex-wrap bg-white-alpha-90">
+          <div className='col-6'>     
             <Galeria info={results.pictures? results.pictures : []}></Galeria>
           </div>
-          <div className='col-4'>
-            <h1 style={{margin:"0px"}}>{results.title}</h1>
-            <span className="text-5xl font-light">  
+          <div className='col-3 justify-content-center'>
+            <h1 className='m-1 text-3xl truncated-text'>{results.title}</h1>
+            <span className="text-3xl font-light">  
                 {
                   moneda.code === results.currency_id ? 
                   `${results.currency_id} ${numeral(results.price).format("0,0.00").replace(/,/g, '#').replace(/\./g, ',').replace(/#/g, '.')}` 
@@ -90,9 +90,16 @@ export default function Detalle() {
                 </span>
           <div className='flex flex-row flex-wrap'>
 
-              <div className="flex align-items-center justify-content-center mr-5 mt-6">
+              <div className="flex align-items-center ml-4 mt-3">
                 <div className='flex flex-column'>
-                  <Button style={{marginBottom:"10px"}}
+    
+                <div className="flex flex-wrap gap-3">
+                    <Button icon="pi pi-minus" className="p-button-outlined p-button-rounded" onClick={count>1?decrement: () => {} }></Button>
+                    <span className="font-light text-2xl w-2rem text-center">{count}</span>
+                    <Button icon="pi pi-plus" className="p-button-outlined p-button-rounded p-button-success" onClick={increment}></Button>
+                </div>
+
+                  <Button className='mb-2 mt-3'
                     label="Comprar"
                     raised size="normal"
                     onClick={()=>{handlePagoyEnvio(results)}}
@@ -102,13 +109,6 @@ export default function Detalle() {
                 </div>
               </div>
 
-              <div className="flex align-items-center justify-content-center mt-6">
-                <div className="flex flex-wrap gap-3">
-                    <Button icon="pi pi-minus" className="p-button-outlined p-button-rounded" onClick={count>1?decrement: () => {} }></Button>
-                    <span className="font-light text-2xl mb-5">{count}</span>
-                    <Button icon="pi pi-plus" className="p-button-outlined p-button-rounded p-button-success" onClick={increment}></Button>
-                </div>
-              </div>
               
           </div>
 
