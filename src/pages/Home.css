@@ -1,0 +1,22 @@
+.carousel-container {
+    width: 100%;
+    max-width: 1500px; 
+    margin: 0 auto; 
+  }
+
+.custom-carousel .carousel-item {
+display: flex;
+justify-content: center;
+align-items: center;
+overflow: hidden;
+}
+
+.custom-carousel .carousel-image {
+width: 100%;
+height: auto; 
+object-fit: cover; 
+}
+
+.p-carousel-indicators .p-carousel-indicator {
+background-color: #007BFF; 
+}

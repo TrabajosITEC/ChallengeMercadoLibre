@@ -1,0 +1,23 @@
+.App-logo{
+    width: 50px;
+}
+
+.App-logo path {
+    fill: #ffffff; 
+}
+
+@keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  @media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+      animation: App-logo-spin infinite 10s linear;
+    }
+  }
+
