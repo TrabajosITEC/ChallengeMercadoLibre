@@ -36,17 +36,17 @@ export default function Home() {
         />
       </div>
         <h2>Recomendaciones</h2>
-        <div class="grid">
-            <div class="col-12 md:col-6 lg:col-3">
+        <div className="grid">
+            <div className="col-12 md:col-6 lg:col-3">
               <CardHome id="MLA835862033"/>
             </div>
-            <div class="col-12 md:col-6 lg:col-3">
+            <div className="col-12 md:col-6 lg:col-3">
               <CardHome id="MLA1236126451"/>
             </div>
-            <div class="col-12 md:col-6 lg:col-3">
+            <div className="col-12 md:col-6 lg:col-3">
               <CardHome id="MLA1418684513"/>
             </div>
-            <div class="col-12 md:col-6 lg:col-3">
+            <div className="col-12 md:col-6 lg:col-3">
               <CardHome id="MLA1413614151"/>
             </div>
         </div>   
