@@ -8,7 +8,7 @@ import { useContext} from 'react';
 import { ModeContext } from "../contexts/MainContext";
 
 export default function Carrito(){
-    const { setcarritoCont } = useContext(ModeContext)
+    const { setcarritoCont,moneda,Dolar } = useContext(ModeContext)
     const [carrito,setCarrito] = useState([]);
     const [totalCarrito, setTotalCarrito] = useState(0);
 
@@ -63,7 +63,8 @@ export default function Carrito(){
                     carrito.map(product => (
             
                     <li key={product.id} className="list-none mb-2">
-                        <Card title={product.title} subTitle={'Precio unitario: $' + product.price} className="">
+                        <Card title={product.title} subTitle={
+                            moneda.code === 'ARS' ?('Precio unitario: $' + numeral(product.price).format('0,0.00')):('Precio unitario: USD' + numeral(product.price/Dolar).format('0,0.00'))} className="">
                             <div className="grid align-items-center">
                                 <div className="col-3 flex align-items-center gap-3">
                                     <Button
@@ -79,7 +80,11 @@ export default function Carrito(){
                                     ></Button>
                                 </div>
                                 <div className="col-6">
-                                    <p className="text-xl text-center w-8rem">Subtotal: {numeral(product.quantity * product.price).format('$0,0.00')}</p>
+                                    {moneda.code === 'ARS' ? (
+                                        <p className="text-l text-center w-8rem">Subtotal pesos: {numeral(product.quantity * product.price).format('$0,0.00')}</p>
+                                    ):(
+                                        <p className="text-l text-center w-8rem">Subtotal dólares: {numeral(product.quantity * product.price /Dolar).format('$0,0.00')}</p>
+                                    )}
                                 </div>
                                 <div className="col-2 flex justify-content-end">
                                     <Button 
@@ -96,10 +101,11 @@ export default function Carrito(){
                     ))}
                 </ul>
                 <div className="col-4">
-                    <Card title={'Resumen de Compra'}>
-                        <div className="grid mt-1">
+                    <Card title={'Resumen de Compra'} subTitle={'TC: '+Dolar}>
+                        <div className="grid ">
                             <div className="col-7">
-                                <p className="font-bold">Total: {numeral(totalCarrito).format('$0,0.00')}</p>
+                            <p>Total USD: {numeral(totalCarrito/Dolar).format('$0,0.00')}</p>
+                            <p className="font-bold">Total Pesos: {numeral(totalCarrito).format('$0,0.00')}</p>
                             </div>
                             <div className="col-5 pt-2">
                             <Button style={{marginBottom:"10px"}}

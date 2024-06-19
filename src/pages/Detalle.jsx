@@ -11,7 +11,7 @@ import { useContext} from 'react';
 import { ModeContext } from "../contexts/MainContext";
 
 export default function Detalle() {
-  const { setcarritoCont } = useContext(ModeContext)
+  const { setcarritoCont,Dolar,moneda } = useContext(ModeContext)
 
   const [results, setResults] = useState({});
 
@@ -73,8 +73,19 @@ export default function Detalle() {
           </div>
           <div className='col-4'>
             <h1 style={{margin:"0px"}}>{results.title}</h1>
-            <span className=" text-5xl font-light">${numeral(results.price).format("0,0.00").replace(/,/g, '#').replace(/\./g, ',').replace(/#/g, '.')}</span>
-
+            <span className="text-5xl font-light">  
+                {
+                  moneda.code === results.currency_id ? 
+                  `${results.currency_id} ${numeral(results.price).format("0,0.00").replace(/,/g, '#').replace(/\./g, ',').replace(/#/g, '.')}` 
+                :
+                  results.currency_id === "USD" ?
+                    `${moneda.code} ${numeral(results.price* Dolar).format("0,0.00").replace(/,/g, '#').replace(/\./g, ',').replace(/#/g, '.')  }`
+                      : 
+                      results.currency_id === "ARS" ?
+                        `${moneda.code} ${numeral(results.price/ Dolar).format("0,0.00").replace(/,/g, '#').replace(/\./g, ',').replace(/#/g, '.')  }`
+                        : ""                  
+                      } 
+                </span>
           <div className='flex flex-row flex-wrap'>
 
               <div className="flex align-items-center justify-content-center mr-5 mt-6">

@@ -26,22 +26,27 @@ export default function Home() {
 
   return (
     <MainLayout>
-      <Carousel className="custom-carousel" value={carouselImages} itemTemplate={itemTemplate} numVisible={1} numScroll={1} circular/>
-        <h2>Recomendaciones</h2>
-      <div class="grid">
-          <div class="col-12 md:col-6 lg:col-3">
-            <CardHome id="MLA835862033"/>
-          </div>
-          <div class="col-12 md:col-6 lg:col-3">
-            <CardHome id="MLA1236126451"/>
-          </div>
-          <div class="col-12 md:col-6 lg:col-3">
-            <CardHome id="MLA1418684513"/>
-          </div>
-          <div class="col-12 md:col-6 lg:col-3">
-            <CardHome id="MLA1413614151"/>
-          </div>
+      <div className="custom-carousel-wrapper">
+        <Carousel className="custom-carousel" value={carouselImages} itemTemplate={itemTemplate} numVisible={1} numScroll={1} circular/>
       </div>
+      
+        <h2>Recomendaciones</h2>
+        <div class="grid">
+            <div class="col-12 md:col-6 lg:col-3">
+              <CardHome id="MLA835862033"/>
+            </div>
+            <div class="col-12 md:col-6 lg:col-3">
+              <CardHome id="MLA1236126451"/>
+            </div>
+            <div class="col-12 md:col-6 lg:col-3">
+              <CardHome id="MLA1418684513"/>
+            </div>
+            <div class="col-12 md:col-6 lg:col-3">
+              <CardHome id="MLA1413614151"/>
+            </div>
+        </div>
+
+   
     </MainLayout>
   );
 }

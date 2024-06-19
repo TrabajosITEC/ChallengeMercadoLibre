@@ -1,6 +1,6 @@
-// import { useState } from "react";
+import { useContext } from "react";
 import MainLayout from "../layouts/MainLayout";
-// import { ProgressBar } from 'primereact/progressbar';
+import { ModeContext } from "../contexts/MainContext";
 import { useLocation } from "react-router-dom";
 import ControlledDemo from "../components/Pasos";
 import FormDireccionPyE from "../components/FormDireccionPyE";
@@ -12,7 +12,7 @@ export default function PagoyEnvioCarrito() {
     const { carrito ,totalCarrito } = location.state || {}
     const results = carrito
     const count = carrito.length
-    
+    const { Dolar } = useContext(ModeContext)
 
 
   return (
@@ -21,7 +21,9 @@ export default function PagoyEnvioCarrito() {
                   <div className=" compra-resumen flex flex-column col-2 shadow-3">
                     <h3>Tu Compra</h3>
                       <p>{`Productos Comprados: ${carrito.length}`}</p>
-                      <p>{`Total a pagar: ${numeral(totalCarrito).format("0,0.00").replace(/,/g, '#').replace(/\./g, ',').replace(/#/g, '.')}`}</p>
+                      <p>{`Total en dolares: ${numeral(totalCarrito).format("0,0.00").replace(/,/g, '#').replace(/\./g, ',').replace(/#/g, '.')}`}</p>
+                      <p>{`Tipo de Cambio: ${Dolar}`}</p>
+                      <p>{`Total a pagar en pesos: ${numeral(totalCarrito).format("0,0.00").replace(/,/g, '#').replace(/\./g, ',').replace(/#/g, '.')}`}</p>
                   </div>
                   <div className="flex flex-column col-10">
                     <ControlledDemo> </ControlledDemo>

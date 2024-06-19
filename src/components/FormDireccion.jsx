@@ -168,14 +168,6 @@ export default function FormDireccion({ results, count }) {
 
             <div className="flex flex-row flex-wrap shadow-3  justify-content-center">
                 <Toast ref={toast} />
-                {/* <Button 
-                severity="success" 
-                className="mb-2 mt-2 flex align-items-center justify-content-center"
-                disabled={ConfirmacionPago && ConfirmacionDir  ? false:true}
-                onClick={handleConfirmar}
-                >
-                Confirmar Compra
-                </Button> */}
                 <ConfirmDialog group="declarative"  visible={visible} onHide={() => setVisible(false)} message="Está por confirmar su compra. Está seguro/a?"  acceptLabel='Si'
                 header="Confirmación" icon="pi pi-exclamation-triangle" accept={accept} reject={reject} />
                 <div className="card flex justify-content-center">

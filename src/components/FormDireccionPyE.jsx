@@ -73,24 +73,6 @@ export default function FormDireccionPyE({ results, count }) {
         setBarraAvance(BarraAvance - 33)
     }
 
-    // const accept = (results, count) => {
-    //     toast.current.show({ severity: 'info', summary: 'Compra Exitosa', detail: '¡Felicitaciones!. Redirigiendo...', life: 3000 });
-    //     setBarraAvance(100)
-    //     const listaCompras = JSON.parse(localStorage.getItem('listaCompras')) || [];
-    //     results.forEach(results => {
-    //         let formaPago = Pagos.join(" - ")
-    //         const ProdNuevo = {Nombre:results.title,Imagen:results.thumbnail, Cantidad:count, TotalPagado: results.price*count, FormaPago: formaPago, DireccionEnvio: `${Direccion.Calle} ${Direccion.Altura}, ${Direccion.Ciudad} - ${Direccion.CodigoPostal}`  }  
-    //         listaCompras.push(ProdNuevo)
-    //     });
-    //     // let listaActualizada = [...listaCompras, { ...ProdNuevo }];
-    //     localStorage.setItem('listaCompras', JSON.stringify(listaCompras));
-        
-    //     setTimeout(() => {
-    //         navigate("/misCompras", { state: { results, count, Direccion, Pagos } });
-    //     }, 4000); 
-        
-    // }
-
     const accept = () => {
         toast.current.show({ severity: 'info', summary: 'Compra Exitosa', detail: '¡Felicitaciones!. Redirigiendo...', life: 3000 });
         setBarraAvance(100);
@@ -196,16 +178,9 @@ export default function FormDireccionPyE({ results, count }) {
 
             <div className="flex flex-row flex-wrap shadow-3  justify-content-center">
                 <Toast ref={toast} />
-                {/* <Button 
-                severity="success" 
-                className="mb-2 mt-2 flex align-items-center justify-content-center"
-                disabled={ConfirmacionPago && ConfirmacionDir  ? false:true}
-                onClick={handleConfirmar}
-                >
-                Confirmar Compra
-                </Button> */}
-                <ConfirmDialog group="declarative"  visible={visible} onHide={() => setVisible(false)} message="Esta por confirmar su compra. Esta seguro/a?" 
-                header="Confirmacion" icon="pi pi-exclamation-triangle" accept={accept} reject={reject} />
+               
+                <ConfirmDialog group="declarative"  visible={visible} onHide={() => setVisible(false)} message="Está por confirmar su compra. Está seguro/a?" acceptLabel="Si" 
+                header="Confirmación" icon="pi pi-exclamation-triangle" accept={accept} reject={reject} />
                 <div className="card flex justify-content-center">
                     <Button 
                         severity="success" 

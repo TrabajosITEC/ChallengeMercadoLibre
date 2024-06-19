@@ -1,4 +1,4 @@
-import React, { useState,useRef, useEffect } from 'react';
+import React, { useState,useRef } from 'react';
 import './Navbar.css';
 import { ReactComponent as Logo } from '../img/logo.svg';
 import { Menubar } from 'primereact/menubar';
