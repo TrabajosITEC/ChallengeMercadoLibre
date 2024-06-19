@@ -7,8 +7,13 @@ import { Checkbox } from "primereact/checkbox";
 import { Toast } from 'primereact/toast';
 import {  useNavigate } from 'react-router-dom';
 import { ConfirmDialog } from 'primereact/confirmdialog';
+import { useContext} from 'react';
+import { ModeContext } from "../contexts/MainContext";
+
 
 export default function FormDireccionPyE({ results, count }) {
+    const {  setcarritoCont, setTotalCarritoCont } = useContext(ModeContext)
+
     const navigate = useNavigate()
 
     const [visible, setVisible] = useState(false);
@@ -108,7 +113,11 @@ export default function FormDireccionPyE({ results, count }) {
             listaCompras.push(ProdNuevo);
         });
         localStorage.setItem('listaCompras', JSON.stringify(listaCompras));
-
+        const carritovacio = []
+        localStorage.setItem('listaCarrito', JSON.stringify(carritovacio));
+        setcarritoCont(0)
+        setTotalCarritoCont(true)
+        
         setTimeout(() => {
             navigate("/misCompras", { state: { results, count, Direccion, Pagos } });
         }, 4000);
@@ -204,8 +213,8 @@ export default function FormDireccionPyE({ results, count }) {
                 >
                 Confirmar Compra
                 </Button> */}
-                <ConfirmDialog group="declarative"  visible={visible} onHide={() => setVisible(false)} message="Esta por confirmar su compra. Esta seguro/a?" 
-                header="Confirmacion" icon="pi pi-exclamation-triangle" accept={accept} reject={reject} />
+                <ConfirmDialog group="declarative"  visible={visible} onHide={() => setVisible(false)} message="Está por confirmar su compra. Esta seguro/a?" acceptLabel='Si'
+                header="Confirmación" icon="pi pi-exclamation-triangle" accept={accept} reject={reject} />
                 <div className="card flex justify-content-center">
                     <Button 
                         severity="success" 

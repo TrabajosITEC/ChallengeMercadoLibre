@@ -8,10 +8,10 @@ import { useContext} from 'react';
 import { ModeContext } from "../contexts/MainContext";
 
 export default function Carrito(){
-    const { setcarritoCont } = useContext(ModeContext)
+    const { setcarritoCont, totalCarritoCont } = useContext(ModeContext)
     const [carrito,setCarrito] = useState([]);
     const [totalCarrito, setTotalCarrito] = useState(0);
-
+    
 
     useEffect(()=>{
         const listaCarrito = localStorage.getItem('listaCarrito');
@@ -99,13 +99,14 @@ export default function Carrito(){
                     <Card title={'Resumen de Compra'}>
                         <div className="grid mt-1">
                             <div className="col-7">
-                                <p className="font-bold">Total: {numeral(totalCarrito).format('$0,0.00')}</p>
+                                <p className="font-bold">Total: {numeral(totalCarritoCont? 0: totalCarrito).format('$0,0.00')}</p>
                             </div>
                             <div className="col-5 pt-2">
                             <Button style={{marginBottom:"10px"}}
                                 label="Comprar"
                                 raised size="normal"
                                 onClick={()=>{handlePagoyEnvio()}}
+                                disabled={totalCarritoCont || totalCarrito===0 ?true:false}
                             />
                             </div>
                         </div>

@@ -11,7 +11,7 @@ import { useContext} from 'react';
 import { ModeContext } from "../contexts/MainContext";
 
 export default function Detalle() {
-  const { setcarritoCont } = useContext(ModeContext)
+  const { setcarritoCont, setTotalCarritoCont } = useContext(ModeContext)
 
   const [results, setResults] = useState({});
 
@@ -62,6 +62,7 @@ export default function Detalle() {
     const totalCarrito = carritoActualizado.reduce((total, item) => total + item.price * item.quantity, 0);
     localStorage.setItem('totalCarrito', JSON.stringify(totalCarrito));
     setcarritoCont(carritoActualizado.length)
+    setTotalCarritoCont(false)
     showSuccess(results.title);
   };
 
