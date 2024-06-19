@@ -4,21 +4,10 @@ export const ModeContext = createContext()
 
 export const ModeProvider = ({children})=>{
     const carrito = JSON.parse(localStorage.getItem('listaCarrito')) || [];
-
     const [totalCarritoCont, setTotalCarritoCont] = useState(false);
     const [carritoCont, setcarritoCont] = useState(carrito.length)
     const [moneda, setMoneda] = useState({ name: 'Peso', code: 'ARS' })
-    const [Tema, setTema] = useState("fondo");
-    const [Modo, setModo] = useState(true)
     const [Dolar,setDolar] = useState(0)
-    const handleTema = (e) => {
-        setModo(!Modo)
-        if (Modo === false) {
-          setTema("fondo");
-        } else {
-          setTema("fondo2");
-        }
-      };
 
     useEffect(() => {
       const fetchResults = async () => {
@@ -34,7 +23,7 @@ export const ModeProvider = ({children})=>{
       fetchResults()
     }, []);
 
-    const data = { Tema, handleTema, carritoCont, setcarritoCont, Dolar,moneda, setMoneda, totalCarritoCont, setTotalCarritoCont };
+    const data = { carritoCont, setcarritoCont, Dolar,moneda, setMoneda, totalCarritoCont, setTotalCarritoCont };
     return(
         <ModeContext.Provider value={data}>
             {children}

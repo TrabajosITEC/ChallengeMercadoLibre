@@ -1,10 +1,10 @@
+import numeral from 'numeral';
 import { useContext } from "react";
-import MainLayout from "../layouts/MainLayout";
-import { ModeContext } from "../contexts/MainContext";
 import { useLocation } from "react-router-dom";
+import { ModeContext } from "../contexts/MainContext";
+import MainLayout from "../layouts/MainLayout";
 import ControlledDemo from "../components/Pasos";
 import FormDireccion from "../components/FormDireccion";
-import numeral from 'numeral';
 
 export default function PagoyEnvio() {
     const location = useLocation()

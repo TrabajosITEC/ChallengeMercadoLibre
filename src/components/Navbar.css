@@ -3,7 +3,7 @@
 }
 
 .App-logo path {
-    fill: #ffffff; /* Cambia este color al que desees */
+    fill: #ffffff; 
 }
 
 @keyframes App-logo-spin {
@@ -20,13 +20,4 @@
       animation: App-logo-spin infinite 10s linear;
     }
   }
-
-#navbar{
-    background-color: rgb(246, 250, 0);
-}
-
-#search{
-  background-color: rgb(255, 255, 255);
-  width: 400px;
-}
 

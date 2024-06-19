@@ -1,24 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import MainLayout from "../layouts/MainLayout";
-import { ProgressSpinner } from 'primereact/progressspinner';
-import '../index.css';
 import { Dropdown } from 'primereact/dropdown';
 import { Paginator } from 'primereact/paginator';
+import { ProgressSpinner } from 'primereact/progressspinner';
+import MainLayout from "../layouts/MainLayout";
 import CardProductos from '../components/CardProductos';
-
-
+import '../index.css';
 
 export default function Results() {
   const location = useLocation();
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [first, setFirst] = useState(0); // Estado para la posición inicial de la paginación
-  const [rows, setRows] = useState(5); // Estado para el número de registros por página
+  const [first, setFirst] = useState(0); 
+  const [rows, setRows] = useState(5); 
   const [sortKey, setSortKey] = useState('');
   const [sortOrder, setSortOrder] = useState(0);
   const [sortField, setSortField] = useState('');
-  const valorBuscado = new URLSearchParams(location.search).get('param'); //El .search es una prop del hook location.
+  const valorBuscado = new URLSearchParams(location.search).get('param');
   const sortOptions = [
     { label: 'Mayor a Menor', value: '!price' },
     { label: 'Menor a Mayor', value: 'price' }
@@ -45,7 +43,7 @@ export default function Results() {
     if (valorBuscado) {
       fetchResults();
     }
-  }, [valorBuscado]); // Se va a ejecutar cada vez que se modifique valor buscado!!
+  }, [valorBuscado]);
 
   const onPageChange = (event) => {
     setFirst(event.first);
@@ -81,19 +79,16 @@ export default function Results() {
     setResults(sortedResults);
   };
 
-  const paginatedResults = results.slice(first, first + rows); // Filtra los resultados para la página actual
-  
+  const paginatedResults = results.slice(first, first + rows); 
   if (loading) {
-    
     return (
-      
       <div className='loadingContainer'>
         <h3>Buscando...</h3>
         <ProgressSpinner />
       </div>
     )
-    
   }
+
   return (
     <MainLayout>
       <div className='grid flex-wrap: wrap text-center '>
@@ -119,7 +114,6 @@ export default function Results() {
         </div>
       </div>
             <Paginator first={first} rows={rows} totalRecords={results.length} onPageChange={onPageChange} />
-             {/*TODO: Verificar que ultima pagina cuando no tiene todos los elementos funcione. Ej: "Estudiantes de Rio Cuarto"  */}
     </MainLayout>
   );
 }

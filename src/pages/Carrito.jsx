@@ -1,17 +1,15 @@
-import { Card } from "primereact/card";
-import { Button } from "primereact/button";
-import MainLayout from "../layouts/MainLayout";
-import { useState, useEffect } from "react";
-import {  useNavigate } from 'react-router-dom';
 import numeral from 'numeral';
-import { useContext} from 'react';
+import { useState, useEffect, useContext } from "react";
+import {  useNavigate } from 'react-router-dom';
+import { Button } from "primereact/button";
+import { Card } from "primereact/card";
+import MainLayout from "../layouts/MainLayout";
 import { ModeContext } from "../contexts/MainContext";
 
 export default function Carrito(){
     const { setcarritoCont,moneda,Dolar, totalCarritoCont  } = useContext(ModeContext)
     const [carrito,setCarrito] = useState([]);
     const [totalCarrito, setTotalCarrito] = useState(0);
-    
 
     useEffect(()=>{
         const listaCarrito = localStorage.getItem('listaCarrito');

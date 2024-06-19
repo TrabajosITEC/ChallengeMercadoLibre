@@ -1,20 +1,14 @@
-
 import React, { useState, useEffect } from 'react';
-import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-// import { Button } from 'primereact/button';
-
+import { DataTable } from 'primereact/datatable';
 
 export default function Tabla() {
     const [products, setProducts] = useState([]);
 
     useEffect(()=>{
         const compras = JSON.parse(localStorage.getItem('listaCompras')) || [];
-        setProducts(compras)
+        setProducts(compras.reverse())
     },[]);
-
-    console.log("Hola")
-    console.log(products)
 
     const imageBodyTemplate = (products) => {
         return <img src={products.Imagen} alt={products.Imagen} className="w-6rem shadow-2 border-round" />;
@@ -28,13 +22,12 @@ export default function Tabla() {
         return formatCurrency(products.TotalPagado);
     };
 
-
     const header = (
         <div className="flex flex-wrap align-items-center justify-content-between gap-2">
             <span className="text-xl text-900 font-bold">Mis Compras</span>
-            {/* <Button icon="pi pi-refresh" rounded raised /> */}
         </div>
     );
+
     const footer = `Compras realizadas: ${products ? products.length : 0}.`;
 
     return (

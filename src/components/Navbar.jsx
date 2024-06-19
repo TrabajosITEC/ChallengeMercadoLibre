@@ -1,14 +1,13 @@
-import React, { useState,useRef } from 'react';
-import './Navbar.css';
-import { ReactComponent as Logo } from '../img/logo.svg';
-import { Menubar } from 'primereact/menubar';
-import { InputText } from 'primereact/inputtext';
-import { Button } from 'primereact/button';
+import React, { useState,useRef,useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useContext} from 'react';
-import { ModeContext } from "../contexts/MainContext";
+import { Button } from 'primereact/button';
 import { Dropdown } from 'primereact/dropdown';
+import { InputText } from 'primereact/inputtext';
+import { Menubar } from 'primereact/menubar';
 import { OverlayPanel } from 'primereact/overlaypanel';
+import { ModeContext } from "../contexts/MainContext";
+import { ReactComponent as Logo } from '../img/logo.svg';
+import './Navbar.css';
 
 export default function Navbar() {
     const { carritoCont, moneda, setMoneda } = useContext(ModeContext)
@@ -19,8 +18,7 @@ export default function Navbar() {
 
     const handleBuscador = async () => {
         if (Buscador.trim() !== '') {
-          navigate(`/results?param=${Buscador}`); // Aca pasas el parametro que va a levantar via Searcparams
-        }
+          navigate(`/results?param=${Buscador}`);         }
       };
 
     const handleCarrito = () => {

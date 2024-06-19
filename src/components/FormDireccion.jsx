@@ -1,33 +1,27 @@
 import React, { useState, useRef } from "react";
+import {  useNavigate } from 'react-router-dom';
 import { AutoComplete } from "primereact/autocomplete";
 import { Button } from 'primereact/button';
+import { Checkbox } from "primereact/checkbox";
+import { ConfirmDialog } from 'primereact/confirmdialog';
 import { Message } from 'primereact/message';
 import { ProgressBar } from 'primereact/progressbar';
-import { Checkbox } from "primereact/checkbox";
 import { Toast } from 'primereact/toast';
-import {  useNavigate } from 'react-router-dom';
-import { ConfirmDialog } from 'primereact/confirmdialog';
 
 export default function FormDireccion({ results, count }) {
     const navigate = useNavigate()
-
     const [visible, setVisible] = useState(false);
     const toast = useRef(null);
-
     const [Calle, setCalle] = useState('')
     const [Altura, setAltura] = useState('')
     const [Ciudad, setCiudad] = useState('')
     const [CodigoPostal, setCodigoPostal] = useState('')
     const [Direccion, setDireccion] = useState({Calle:"",Altura:"",Ciudad:"",CodigoPostal:""})
-    
     const [AdvertenciaDir, setAdvertenciaDir] = useState(false)
     const [ConfirmacionDir, setConfirmacionDir] = useState(false)
-
     const [AdvertenciaPago, setAdvertenciaPago] = useState(false)
     const [ConfirmacionPago, setConfirmacionPago] = useState(false)
-
     const [BarraAvance, setBarraAvance ] = useState(0)
-
     const [Pagos, setPagos] = useState([]);
 
     const onPagosChange = (e) => {

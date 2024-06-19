@@ -1,22 +1,22 @@
 .carousel-container {
     width: 100%;
-    max-width: 1500px; /* Ajusta esto según el diseño de tu sitio */
-    margin: 0 auto; /* Centra el carrusel */
+    max-width: 1500px; 
+    margin: 0 auto; 
   }
 
 .custom-carousel .carousel-item {
 display: flex;
 justify-content: center;
 align-items: center;
-overflow: hidden; /* Asegúrate de que el contenido no se desborde */
+overflow: hidden;
 }
 
 .custom-carousel .carousel-image {
 width: 100%;
-height: auto; /* Mantén la relación de aspecto */
-object-fit: cover; /* Asegúrate de que la imagen cubra el contenedor */
+height: auto; 
+object-fit: cover; 
 }
 
 .p-carousel-indicators .p-carousel-indicator {
-background-color: #007BFF; /* Personaliza el color de los indicadores */
+background-color: #007BFF; 
 }

@@ -1,24 +1,20 @@
+import numeral from 'numeral';
 import React, { useState, useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from 'primereact/button';
 import { DataView } from 'primereact/dataview';
 import { Rating } from 'primereact/rating';
-// import { Tag } from 'primereact/tag';
 import { classNames } from 'primereact/utils';
-import { useNavigate } from 'react-router-dom';
-import './CardProductos.css'
-import numeral from 'numeral';
 import { ModeContext } from '../contexts/MainContext';
+import './CardProductos.css'
 
 export default function CardProductos({ info }) {
   const { Dolar, moneda } = useContext(ModeContext)
   const [products, setProducts] = useState([]);
   useEffect(() => {
-    setProducts(info); // Este cambio dipara el cambio en el DATAView.
-  }, [info]); // El cambio de info dispara el useEffect
-
-  // const [IdProducto , setIdProducto] = useState(0)
+    setProducts(info); 
+  }, [info]); 
   const navigate = useNavigate()
-
   const handleDetalleProducto = (idRecibida) => {
       navigate(`/detalle?id=${idRecibida}`);
   };
@@ -29,7 +25,6 @@ export default function CardProductos({ info }) {
       <div className="col-11" key={product.id}>
         <div className={classNames('flex flex-column xl:flex-row xl:align-items-start p-4 gap-4', { 'border-top-1 surface-border': index !== 0 })}>
           <img className="max-w-10rem w-full max-h-10rem h-full  shadow-2" src={product.thumbnail} alt={product.title} />
-          {/* TODO: Tamaño maximo de imagenes  */}
           <div className="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
             <div className="col-9 flex flex-column align-items-center sm:align-items-start gap-3">
                 <h3 className='marcaProducto'>

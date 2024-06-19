@@ -1,27 +1,21 @@
-import React from 'react';
-import MainLayout from "../layouts/MainLayout";
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useEffect, useState, useRef } from 'react';
-import { useCounter } from 'primereact/hooks';
 import numeral from 'numeral';
-import Galeria from '../components/Galeria';
+import React,{ useEffect, useState, useRef ,useContext} from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
-import { useContext} from 'react';
+import { useCounter } from 'primereact/hooks';
 import { ModeContext } from "../contexts/MainContext";
+import MainLayout from "../layouts/MainLayout";
+import Galeria from '../components/Galeria';
 
 export default function Detalle() {
   const { setcarritoCont,Dolar,moneda,setTotalCarritoCont } = useContext(ModeContext)
-  
-
   const [results, setResults] = useState({});
-
   const { count, increment, decrement} = useCounter(1);
-
   const location = useLocation();
   const id = new URLSearchParams(location.search).get('id');
-  
   const toast = useRef(null);
+
   const showSuccess = (titulo) => {
     toast.current.show({severity:'success', summary: '¡Agregado con exito!', detail:`${titulo}`, life: 3000});
   }
@@ -30,7 +24,6 @@ export default function Detalle() {
   const handlePagoyEnvio = (results) => {
     navigate("/PagoyEnvio", { state: {results, count} })
   }
-
 
   useEffect(() => {
     const fetchResults = async () => {
@@ -46,7 +39,7 @@ export default function Detalle() {
     if (id) {
       fetchResults()
     }
-  }, [id]); // Se va a ejecutar cada vez que se modifique valor buscado!!
+  }, [id]); 
 
   const agregarAlCarrito = () => {
     const carrito = JSON.parse(localStorage.getItem('listaCarrito')) || [];
@@ -108,10 +101,7 @@ export default function Detalle() {
                   <Button label="Agregar al carrito" outlined raised size="Normal" onClick={()=>agregarAlCarrito()} />
                 </div>
               </div>
-
-              
           </div>
-
           </div>
         </div>
     </MainLayout>

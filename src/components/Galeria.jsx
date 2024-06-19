@@ -7,10 +7,9 @@ export default function Galeria({info}) {
 
         useEffect(() => {
         if (info && info.length > 0) {
-            const data = info.map(item => ({
+            const data = info.slice(0,10).map(item => ({
                 thumbnailImageSrc: item.url,
                 itemImageSrc: item.secure_url,
-                
                 title: ""
             }));
             setImages(data);

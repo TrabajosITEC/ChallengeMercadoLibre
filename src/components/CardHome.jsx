@@ -1,15 +1,13 @@
-import React from 'react'; 
-import { Card } from 'primereact/card';
-import { useEffect,useState,useContext } from "react";
 import numeral from 'numeral';
-import { Rating } from 'primereact/rating';
+import React, { useEffect,useState,useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'primereact/button';
+import { Card } from 'primereact/card';
+import { Rating } from 'primereact/rating';
 import { ModeContext } from '../contexts/MainContext';
 
 export default function CardHome({ id }) {
     const { Dolar, moneda } = useContext(ModeContext)
-
     const [results, setResults] = useState({});
     const navigate = useNavigate()
     const handleDetalleProducto = (idRecibida) => {
@@ -34,7 +32,6 @@ export default function CardHome({ id }) {
 
     const footer = (
         <div className="card-footer">
-            {/* <span className="text-xl font-semibold">$ {numeral(results.price).format("0,0.00")}</span> */}
             <span className=" text-xl font-semibold">  
                 {
                   moneda.code === results.currency_id ? 
@@ -51,7 +48,6 @@ export default function CardHome({ id }) {
             <Rating value={Math.floor(Math.random() * 3) + 3} readOnly cancel={false} />
         </div>
     )
-
         return (
             <div className="card-container flex justify-content-center">
             <Card className="lg:w-25rem h-25rem card-content" footer={footer}>

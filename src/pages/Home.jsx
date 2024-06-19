@@ -7,17 +7,13 @@ import image4 from '../img/carousel4.jpg';
 import CardHome from "../components/CardHome";
 import './Home.css'
 
-
 export default function Home() {
-  
-
   const carouselImages = [
     { id: 1, image: image1, alt: 'Imagen 1' },
     { id: 2, image: image2, alt: 'Imagen 2' },
     { id: 3, image: image3, alt: 'Imagen 3' },
     { id: 4, image: image4, alt: 'Imagen 4' },
   ];
-  
 
   const itemTemplate = (item) => {
     return (
