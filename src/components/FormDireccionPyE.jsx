@@ -7,8 +7,13 @@ import { Checkbox } from "primereact/checkbox";
 import { Toast } from 'primereact/toast';
 import {  useNavigate } from 'react-router-dom';
 import { ConfirmDialog } from 'primereact/confirmdialog';
+import { useContext} from 'react';
+import { ModeContext } from "../contexts/MainContext";
+
 
 export default function FormDireccionPyE({ results, count }) {
+    const {  setcarritoCont, setTotalCarritoCont } = useContext(ModeContext)
+
     const navigate = useNavigate()
 
     const [visible, setVisible] = useState(false);
@@ -90,7 +95,11 @@ export default function FormDireccionPyE({ results, count }) {
             listaCompras.push(ProdNuevo);
         });
         localStorage.setItem('listaCompras', JSON.stringify(listaCompras));
-
+        const carritovacio = []
+        localStorage.setItem('listaCarrito', JSON.stringify(carritovacio));
+        setcarritoCont(0)
+        setTotalCarritoCont(true)
+        
         setTimeout(() => {
             navigate("/misCompras", { state: { results, count, Direccion, Pagos } });
         }, 4000);
