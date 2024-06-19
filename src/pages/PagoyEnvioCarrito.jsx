@@ -21,7 +21,7 @@ export default function PagoyEnvioCarrito() {
                   <div className=" compra-resumen flex flex-column col-2 shadow-3">
                     <h3>Tu Compra</h3>
                       <p>{`Productos Comprados: ${carrito.length}`}</p>
-                      <p>{`Total en dolares: ${numeral(totalCarrito).format("0,0.00").replace(/,/g, '#').replace(/\./g, ',').replace(/#/g, '.')}`}</p>
+                      <p>{`Total en dolares: ${numeral(totalCarrito/Dolar).format("0,0.00").replace(/,/g, '#').replace(/\./g, ',').replace(/#/g, '.')}`}</p>
                       <p>{`Tipo de Cambio: ${Dolar}`}</p>
                       <p>{`Total a pagar en pesos: ${numeral(totalCarrito).format("0,0.00").replace(/,/g, '#').replace(/\./g, ',').replace(/#/g, '.')}`}</p>
                   </div>

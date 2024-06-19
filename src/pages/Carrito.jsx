@@ -104,7 +104,7 @@ export default function Carrito(){
                     <Card title={'Resumen de Compra'} subTitle={'TC: '+Dolar}>
                         <div className="grid ">
                             <div className="col-7">
-                            <p>Total USD: {numeral(totalCarrito/Dolar).format('$0,0.00')}</p>
+                            <p>Total USD: {numeral(totalCarritoCont? 0:totalCarrito/Dolar).format('$0,0.00')}</p>
                             <p className="font-bold">Total Pesos: {numeral(totalCarritoCont? 0: totalCarrito).format('$0,0.00')}</p>
                             </div>
                             <div className="col-5 pt-2">
