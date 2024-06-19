@@ -1,4 +1,4 @@
-import React, { useState,useRef } from 'react';
+import React, { useState,useRef, useEffect } from 'react';
 import './Navbar.css';
 import { ReactComponent as Logo } from '../img/logo.svg';
 import { Menubar } from 'primereact/menubar';
@@ -11,8 +11,8 @@ import { Dropdown } from 'primereact/dropdown';
 import { OverlayPanel } from 'primereact/overlaypanel';
 
 export default function Navbar() {
-    const { carritoCont, Dolar } = useContext(ModeContext)
-    const [moneda, setMoneda] = useState({ name: 'Peso', code: 'ARS' })
+    const { carritoCont, moneda, setMoneda } = useContext(ModeContext)
+    
     const op = useRef(null);
     const [Buscador, setBuscador] = useState("")
     const navigate = useNavigate()

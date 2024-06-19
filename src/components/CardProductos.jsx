@@ -10,7 +10,7 @@ import numeral from 'numeral';
 import { ModeContext } from '../contexts/MainContext';
 
 export default function CardProductos({ info }) {
-  const { Dolar } = useContext(ModeContext)
+  const { Dolar, moneda } = useContext(ModeContext)
   const [products, setProducts] = useState([]);
   useEffect(() => {
     setProducts(info); // Este cambio dipara el cambio en el DATAView.
@@ -19,16 +19,9 @@ export default function CardProductos({ info }) {
   // const [IdProducto , setIdProducto] = useState(0)
   const navigate = useNavigate()
 
-  const handleBotonCarrito = (event) => {
-    navigate("/")
-  };
-
   const handleDetalleProducto = (idRecibida) => {
-
       navigate(`/detalle?id=${idRecibida}`);
-
   };
-
 
   const itemTemplate = (product, index) => {
   
@@ -54,7 +47,19 @@ export default function CardProductos({ info }) {
               </div>
             </div>
             <div className="col-3 flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
-              <span className="mt-5 text-xl font-semibold">$ {numeral(product.price).format("0,0.00").replace(/,/g, '#').replace(/\./g, ',').replace(/#/g, '.')}</span>
+              <span className="mt-5 text-xl font-semibold">  
+                {
+                  moneda.code === product.currency_id ? 
+                  `${product.currency_id} ${numeral(product.price).format("0,0.00").replace(/,/g, '#').replace(/\./g, ',').replace(/#/g, '.')}` 
+                :
+                  product.currency_id === "USD" ?
+                    `${moneda.code} ${numeral(product.price* Dolar).format("0,0.00").replace(/,/g, '#').replace(/\./g, ',').replace(/#/g, '.')  }`
+                      : 
+                      product.currency_id === "ARS" ?
+                        `${moneda.code} ${numeral(product.price/ Dolar).format("0,0.00").replace(/,/g, '#').replace(/\./g, ',').replace(/#/g, '.')  }`
+                        : ""                  
+                      } 
+                </span>
               <Rating value={Math.floor(Math.random() * 3) + 3} readOnly cancel={false}></Rating>
             </div>
           </div>

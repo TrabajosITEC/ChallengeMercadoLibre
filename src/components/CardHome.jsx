@@ -1,12 +1,15 @@
 import React from 'react'; 
 import { Card } from 'primereact/card';
-import { useEffect,useState } from "react";
+import { useEffect,useState,useContext } from "react";
 import numeral from 'numeral';
 import { Rating } from 'primereact/rating';
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'primereact/button';
+import { ModeContext } from '../contexts/MainContext';
 
 export default function CardHome({ id }) {
+    const { Dolar, moneda } = useContext(ModeContext)
+
     const [results, setResults] = useState({});
     const navigate = useNavigate()
     const handleDetalleProducto = (idRecibida) => {
@@ -31,7 +34,20 @@ export default function CardHome({ id }) {
 
     const footer = (
         <div className="card-footer">
-            <span className="text-xl font-semibold">$ {numeral(results.price).format("0,0.00")}</span>
+            {/* <span className="text-xl font-semibold">$ {numeral(results.price).format("0,0.00")}</span> */}
+            <span className=" text-xl font-semibold">  
+                {
+                  moneda.code === results.currency_id ? 
+                  `${results.currency_id} ${numeral(results.price).format("0,0.00").replace(/,/g, '#').replace(/\./g, ',').replace(/#/g, '.')}` 
+                :
+                  results.currency_id === "USD" ?
+                    `${moneda.code} ${numeral(results.price* Dolar).format("0,0.00").replace(/,/g, '#').replace(/\./g, ',').replace(/#/g, '.')  }`
+                      : 
+                      results.currency_id === "ARS" ?
+                        `${moneda.code} ${numeral(results.price/ Dolar).format("0,0.00").replace(/,/g, '#').replace(/\./g, ',').replace(/#/g, '.')  }`
+                        : ""                  
+                      } 
+                </span>
             <Rating value={Math.floor(Math.random() * 3) + 3} readOnly cancel={false} />
         </div>
     )

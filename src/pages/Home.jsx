@@ -8,6 +8,8 @@ import CardHome from "../components/CardHome";
 
 
 export default function Home() {
+  
+
   const carouselImages = [
     { id: 1, image: image1, alt: 'Imagen 1' },
     { id: 2, image: image2, alt: 'Imagen 2' },
