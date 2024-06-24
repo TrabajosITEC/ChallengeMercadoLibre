@@ -22,7 +22,7 @@ export default function CardProductos({ info }) {
   const itemTemplate = (product, index) => {
   
     return (
-      <div className="col-11" key={product.id}>
+      <div className="col-11" key={product.id} onClick={() => handleDetalleProducto(product.id)} style={{cursor:"pointer"}}>
         <div className={classNames('flex flex-column xl:flex-row xl:align-items-start p-4 gap-4', { 'border-top-1 surface-border': index !== 0 })}>
           <img className="max-w-10rem w-full max-h-10rem h-full  shadow-2" src={product.thumbnail} alt={product.title} />
           <div className="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
