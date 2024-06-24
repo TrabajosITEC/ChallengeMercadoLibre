@@ -49,7 +49,7 @@ export default function CardHome({ id }) {
         </div>
     )
         return (
-            <div className="card-container flex justify-content-center">
+            <div className="card-container flex justify-content-center"  onClick={() => handleDetalleProducto(results.id)} style={{cursor:"pointer"}} >
             <Card className="lg:w-25rem h-25rem card-content" footer={footer}>
                 <div className="card-content-inner">
                     <img className="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round" src={results.thumbnail} alt={results.title} />
